@@ -8,6 +8,7 @@ import Button from "../components/Button.jsx";
 import axios from "axios";
 import Cards from "../components/Card.jsx";
 import TimeDifference from "../TimeDifference.jsx";
+import { useNavigate } from "react-router-dom";
 
 const JobsList = ({ head }) => {
   const [jobs, setJobs] = useState([]);
@@ -15,6 +16,8 @@ const JobsList = ({ head }) => {
   const [sortOption, setSortOption] = useState("");
   const [ageRange, setAgeRange] = useState("all");
   const searchInputRef = useRef(null);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -54,8 +57,10 @@ const JobsList = ({ head }) => {
         return true;
       })
       .sort((a, b) => {
-        if (sortOption === "time-asc") return new Date(a.createdAt) - new Date(b.createdAt);
-        if (sortOption === "time-desc") return new Date(b.createdAt) - new Date(a.createdAt);
+        if (sortOption === "time-asc")
+          return new Date(a.createdAt) - new Date(b.createdAt);
+        if (sortOption === "time-desc")
+          return new Date(b.createdAt) - new Date(a.createdAt);
         return 0;
       });
   }, [jobs, search, ageRange, sortOption]);
@@ -91,16 +96,16 @@ const JobsList = ({ head }) => {
           </div>
         </div>
         <div>
-        <Boxes
-          searchValue={search}
-          onSearchChange={(e) => setSearch(e.target.value)}
-          sortOption={sortOption}
-          onSortChange={(e) => setSortOption(e.target.value)}
-          ageRange={ageRange}
-          onAgeChange={(e) => setAgeRange(e.target.value)}
-          searchInputRef={searchInputRef}
-          handleFocus={() => searchInputRef.current.focus()}
-        />
+          <Boxes
+            searchValue={search}
+            onSearchChange={(e) => setSearch(e.target.value)}
+            sortOption={sortOption}
+            onSortChange={(e) => setSortOption(e.target.value)}
+            ageRange={ageRange}
+            onAgeChange={(e) => setAgeRange(e.target.value)}
+            searchInputRef={searchInputRef}
+            handleFocus={() => searchInputRef.current.focus()}
+          />
         </div>
       </div>
       <div className="my-10 botuser">
@@ -147,7 +152,7 @@ const JobsList = ({ head }) => {
             All Jobs
           </Heading>
           <div className="flex flex-col py-5 gap-3">
-          {filteredAndSortedJobs.map((job, index) => (
+            {filteredAndSortedJobs.map((job, index) => (
               <Cards
                 key={index}
                 imageSrc={job.imageSrc || node}
