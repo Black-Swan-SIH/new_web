@@ -7,25 +7,25 @@ import Sign from "./components/SignIn.jsx";
 import Profile from "./components/profile.jsx";
 import { green } from "@mui/material/colors";
 import Job from "./components/Job.jsx";
-import Candidatelist from "./pages/Candidatelist.jsx";
+import Candidatelist from "./Pages/Candidatelist.jsx";
 import ProgressBar from "./components/progressBar.jsx";
-import Dashboard from "./pages/Dashboard.jsx";
-import Main from "./pages/Main.jsx";
-import CandidateHome from "./pages/CandidateHome.jsx";
+import Dashboard from "./Pages/Dashboard.jsx";
+import Main from "./Pages/Main.jsx";
+import CandidateHome from "./Pages/CandidateHome.jsx";
 import Joblist from "./components/Joblist.jsx";
-import JoblistCandidate from "./pages/JoblistCandidate.jsx";
+import JoblistCandidate from "./Pages/JoblistCandidate.jsx";
 
-import JobCandidate from "./pages/JobCandidate.jsx";
+import JobCandidate from "./Pages/JobCandidate.jsx";
 
 
 
 // import Joblist from "./components/Joblist";
-import JobsList from "./pages/JobsList.jsx";
+import JobsList from "./Pages/JobsList.jsx";
 import StepperForm from "./components/Stepperform";
 
 // import node from "./assets/node.jpg";
 import Navbar3 from "./components/Navbar3";
-import JobApplications from "./pages/JobApplications.jsx";
+import JobApplications from "./Pages/JobApplications.jsx";
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   
