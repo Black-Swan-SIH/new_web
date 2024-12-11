@@ -1,0 +1,17 @@
+.image-pcontainer {
+    height:8vh;
+    width: 9vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10%;
+    margin-left: 10px; 
+  }
+  
+  .pimage {
+    height: 100%;
+    width: 100%; /* Ensure the image fills the container */
+    object-fit: cover; /* Maintain aspect ratio and cover the container */
+    border-radius: 10%; /* Same as .image-ccontainer for consistent rounded corners */
+  }

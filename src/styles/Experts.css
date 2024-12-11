@@ -1,0 +1,28 @@
+.box{
+    position: relative;
+    left: 5%;
+    height: auto;
+    width: 50vw;
+    background-color: rgb(212, 212, 212);
+    padding: 50px;
+}
+.one{
+    display: grid;
+    grid-template-columns: 1.5fr 2fr;
+    gap: 15px;
+}
+.two{
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 2fr;
+    gap: 15px;
+}
+.three{
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 15px;
+}
+.four{
+    display: grid;
+    grid-template-columns: 3fr 0.1fr;
+    gap: 15px;
+}

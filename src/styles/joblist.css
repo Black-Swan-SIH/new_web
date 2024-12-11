@@ -1,0 +1,35 @@
+.ccontainer {
+  display: flex;
+  align-items: center;
+  height: 65px;
+  width: 25vw;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  overflow: hidden;
+  background: rgba(156, 175, 183, 1);
+}
+
+.image-ccontainer {
+  height:8vh;
+  width: 9vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10%;
+  margin-left: 10px; 
+}
+
+.cimage {
+  height: 100%;
+  width: 100%; /* Ensure the image fills the container */
+  object-fit: cover; /* Maintain aspect ratio and cover the container */
+  border-radius: 10%; /* Same as .image-ccontainer for consistent rounded corners */
+}
+
+.ctext {
+  flex: 1;
+  padding-left: 15px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}

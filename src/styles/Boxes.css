@@ -1,0 +1,112 @@
+.boxes {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 0px 10px 12.2vw;
+    align-self: flex-start;
+  }
+  
+  .search-box {
+    width: 75%;
+    max-width: 700px;
+    padding: 3px 8px 3px 10px;
+    margin: 20px 0;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 10px;
+    transition: border 0.3s ease;
+  }
+  
+  .search-box:focus-within {
+    border: 1px solid #007bff;
+  }
+  
+  .searchkk input:focus {
+    outline: none;
+  }
+  
+  .search-prefix {
+    display: flex;
+    align-items: center;
+  }
+  
+  .searchkk {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    gap: 10px;
+  }
+  
+  .searchkk input {
+    background-color: transparent;
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    padding: 5px;
+  }
+  
+  .searchkk input::placeholder {
+    font-size: 15px;
+    font-weight: 500;
+    color: rgba(131, 131, 131, 1);
+  }
+  
+  .sort-dropdown {
+    width: 32%;
+    padding: 5px 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: var(--bg-color);
+    color: #333;
+    appearance: none;
+    cursor: pointer;
+    background-image: url("https://cdn-icons-png.flaticon.com/512/32/32195.png");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 12px;
+    transition: background-color 0.3s ease;
+
+  }
+  
+  .sort-dropdown:focus {
+    outline: none;
+    border-color: #007bff;
+  }
+  
+  .sort-dropdown:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .sort-dropdown-all {
+    width: 20%;
+    padding: 5px 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    background-color: var(--bg-color);
+    color: #333;
+    appearance: none;
+    cursor: pointer;
+    background-image: url("https://cdn-icons-png.flaticon.com/512/32/32195.png");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 12px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .sort-dropdown-all:focus {
+    outline: none;
+    border-color: #007bff;
+  }
+  
+  .sort-dropdown-all:hover {
+    background-color: #f1f1f1;
+  }
+  

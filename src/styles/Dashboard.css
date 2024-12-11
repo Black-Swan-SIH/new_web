@@ -1,0 +1,68 @@
+.dash{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    justify-content: space-between;
+    margin: auto;
+    overflow: hidden;
+    width: 78%;
+    position: relative;
+    top: 9vw;
+}
+.dashboard{
+    display: flex;
+    justify-content:start;
+    padding: 1em;
+    height: 60%;
+    overflow: auto; 
+}
+
+.items{
+    margin-left: 0;
+    padding-right: 4vw;
+}
+.first-column{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+}
+.controlcenter{
+    display: flex;
+    flex-direction: column;
+    padding: 0 1em;
+    width: 100%;
+    height: auto;
+    gap:15px;
+    overflow: auto; 
+}
+.items{
+    display: flex;
+    margin-top: 20px;
+    flex-direction: row;
+    gap: 30px;
+    padding: 0 1em;
+    transform: translateX(-12px);
+}
+.ex{
+    display: flex;
+}
+
+.second-column{
+    padding: 0 10px 0 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.sfirst{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.rec{
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}

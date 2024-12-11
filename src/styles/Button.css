@@ -1,0 +1,39 @@
+.bt {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5em 1em;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+  font-size: 1rem;
+}
+
+.bt.hover-border:hover {
+  border-color: var(--border-color1);
+}
+
+.icon {
+  margin-left: 8px;
+}
+
+@media (max-width: 768px) {
+  .bt {
+    padding: 0.4em 0.8em;
+    font-size: 0.9rem;
+  }
+  .icon {
+    margin-left: 6px;
+  }
+}
+
+@media (max-width: 480px) {
+  .bt {
+    padding: 0.3em 0.6em;
+    font-size: 0.8rem;
+  }
+  .icon {
+    margin-left: 4px;
+  }
+}

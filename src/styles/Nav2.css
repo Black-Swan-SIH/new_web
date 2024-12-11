@@ -1,0 +1,169 @@
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.header {
+  position: fixed;
+  top: 3%;
+  margin: auto;
+  left: 0;
+  right: 0;
+  width: 70%;
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.7em 2em;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 10px;
+  color: var(--text-color);
+  box-shadow: 0px 4px 30px -2px rgba(0, 0, 0, 0.2);
+  z-index: 100;
+  transition: all 0.3s ease;
+}
+
+.header:hover {
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0px 6px 40px -2px rgba(0, 0, 0, 0.3);
+}
+
+
+.nav {
+  display: flex;
+  align-items: center;
+}
+
+b {
+  font-size: 1.6em;
+  font-weight: bold;
+  color: var(--text-color1);
+}
+.hindi {
+  font-size: 1em;
+  font-weight: bold;
+}
+
+.theme-toggle {
+  padding: 0.5em 1em;
+  border: none;
+  border-radius: 0.3em;
+  background-color: var(--text-color);
+  color: var(--bg-color);
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+.sun {
+  color: #202020;
+  font-size: 1.2em;
+}
+
+.sun.dark {
+  color: #ffffff;
+}
+
+.moon {
+  color: #202020;
+  font-size: 1.2em;
+}
+.moon.dark {
+  color: white;
+}
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1em;
+  }
+
+  .nav {
+    flex-direction: column;
+    gap: 0.5em;
+  }
+
+  b {
+    margin-bottom: 1em;
+  }
+}
+
+.switch {
+  margin-top: 2px;
+  position: relative;
+  display: inline-block;
+  width: 33px;
+  height: 17px;
+  opacity: 0.7;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  color: white;
+  background-color: rgb(218, 212, 212);
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  top: 0;
+  bottom: 0;
+  height: 12px;
+  width: 12px;
+  left: 3px;
+  margin: auto;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: lightgrey;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196f3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(14px);
+  -ms-transform: translateX(14px);
+  transform: translateX(14px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+i {
+  opacity: 0.3;
+  border-right: 15px;
+}

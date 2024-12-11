@@ -1,0 +1,36 @@
+.experting {
+  display: flex;
+  align-items: center;
+  width: 28vw; /* Fixed width for the container */
+  border-radius: 10px;
+  margin: 10px 0;
+  padding-right: 2vw;
+  overflow: hidden;
+}
+
+.image-c {
+  height: 5vh;
+  width: 5vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  border-radius: 8px;
+  align-items: center;
+  flex-shrink: 0; /* Prevent shrinking */
+}
+
+.image-e {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.name{
+  width: 20em;
+  margin-left: 1vw;
+}
+
+.expert{
+  width: 22em;
+  margin-right: 20px;
+}

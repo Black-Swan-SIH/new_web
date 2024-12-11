@@ -1,0 +1,73 @@
+.userlist-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 90px;
+  width: 37rem;
+  border-radius: 12px;
+  background-color: #9CAFB7;
+  background: #9CAFB7;
+  overflow: hidden;
+  padding: 0 7px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.userlist-container-invalid {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 90px;
+  width: 28rem;
+  border-radius: 12px;
+  background-color: #9CAFB7;
+  background: #9CAFB7;
+  overflow: hidden;
+  padding: 0 7px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.image-container {
+  height: 75px;
+  width: 75px; /* Ensure the container remains square */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px; /* Reduced border-radius for a cleaner look */
+  overflow: hidden;
+  background-color: #f0f0f0; /* Background for placeholder */
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures the image fills the container nicely */
+  aspect-ratio: 1/1; /* Keeps the image square */
+  border-radius: 10px; /* Matches container’s border-radius for consistency */
+}
+
+.text {
+  flex: 1; /* Allows the text to expand and take up available space */
+  padding-left: 15px;
+  justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* Prevents text overflow */
+  white-space: nowrap; /* Ensures text doesn’t wrap */
+  text-overflow: ellipsis; /* Adds ellipsis for truncated text */
+}
+
+.age {
+  display: flex;
+  align-items: center; /* Align age text vertically */
+  gap: 4px; /* Adds spacing between age items */
+}
+
+.suffix {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%; /* Keeps it circular */
+  overflow: hidden; /* Ensures content stays within bounds */
+}

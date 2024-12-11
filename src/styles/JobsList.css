@@ -1,0 +1,27 @@
+.contuser {
+  width:66%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+  top: 16.5vh;
+  left: 25vh;
+}
+
+.itemsuser {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+}
+
+.recuser{
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.botuser{
+  display: flex;
+  justify-content: space-between;
+}

@@ -1,0 +1,63 @@
+#mainn{
+    width: 80vw;
+    display: flex;
+    height: 80px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#picturee{
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: #bdbdbd;
+}
+
+#mainn h1{
+    font-size: 24px;
+    font-weight: 600;
+    font-family: "Poppins", sans-serif;
+    color: #2C2C34;
+}
+
+#roww{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 450px;
+}
+
+.key{
+    font-size: 13px;
+    color: #9D9B9B;
+    padding-right: 7px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 450;
+}
+
+.value{
+    font-size: 13px;
+    font-weight: 550;
+    color: "#3c3c3c";
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+}
+
+.buttonn{
+    width: 80px;
+    height: 30px;
+    color: white;
+    font-weight: 500;
+    font-family: "Poppins", sans-serif;
+}
+
+#approve{
+    background-color: black;
+    border-radius: 10px;
+    margin: 5px;
+}
+#reject{
+    background-color: #7A0000;
+    border-radius: 10px;
+    margin: 5px;
+}
