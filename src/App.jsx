@@ -7,7 +7,7 @@ import Sign from "./components/SignIn.jsx";
 import Profile from "./components/profile.jsx";
 import { green } from "@mui/material/colors";
 import Job from "./components/Job.jsx";
-import Candidatelist from "./pages/Candidatelist.jsx";
+import Candidatelist from "./Pages/Candidatelist.jsx";
 import ProgressBar from "./components/progressBar.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
 import Main from "./pages/Main.jsx";
