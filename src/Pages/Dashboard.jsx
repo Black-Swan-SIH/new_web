@@ -8,7 +8,7 @@ import node from "../assets/node.jpg";
 import Button from "../components/Button.jsx";
 import { FaGreaterThan } from "react-icons/fa";
 import axios from "axios";
-import TimeDifference from "../TimeDifference";
+import TimeDifference from "../TimeDifference.jsx";
 import Cards from "../components/Card.jsx";
 import { useNavigate } from "react-router-dom";
 const Dashboard = () => {

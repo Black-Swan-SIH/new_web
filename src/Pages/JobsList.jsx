@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import "../styles/JobsList.css";
 import node from "../assets/node.jpg";
 import Heading from "../components/Heading.jsx";
-import Itemcount from "../components/Itemcount";
+import Itemcount from "../components/Itemcount.jsx";
 import Boxes from "../components/Boxes.jsx";
 import Button from "../components/Button.jsx";
 import axios from "axios";
