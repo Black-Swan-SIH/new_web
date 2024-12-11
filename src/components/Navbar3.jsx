@@ -3,7 +3,9 @@ import racImage from "../assets/rac1.png";
 import racImage1 from "../assets/rac.png";
 import Button from "./Button.jsx";
 import { auto } from "@popperjs/core";
+import { useNavigate } from "react-router-dom";
 function Navbar3() {
+  const navigate = useNavigate();
   return (
     <>
       <nav
@@ -42,6 +44,9 @@ function Navbar3() {
               </li>
               <li style={{ marginLeft: "30px", marginBottom: "30px" }}>
                 <Button
+                  onClick={() => {
+                    navigate("/admin");
+                  }}
                   width="80px"
                   bgcolor="black"
                   color="white"
