@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "./Button";
+import Button from "./Button.jsx";
 import { RecoilRoot, useRecoilValue } from "recoil";
 import { userAtom } from "../atoms/name";
 

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../styles/nav.css";
-import Button from "./Button";
+import Button from "./Button.jsx";
 
 function NavBar() {
   const [darkMode, setDarkMode] = useState(false);

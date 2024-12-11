@@ -1,6 +1,6 @@
 import React from "react";
-import Button from "./Button";
-import ExpandableDiv from "./keySkills";
+import Button from "./Button.jsx";
+import ExpandableDiv from "./keySkills.jsx";
 import { useState } from "react";
 function CandidateCards({ height,height2 }) {
   const [divExpanded, setDivExpanded] = useState(false);

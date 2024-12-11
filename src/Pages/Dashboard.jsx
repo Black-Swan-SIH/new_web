@@ -1,15 +1,15 @@
 import React, { useEffect, useMemo, useState } from "react";
-import Heading from "../components/Heading";
+import Heading from "../components/Heading.jsx";
 import "../styles/Dashboard.css";
-import CandidateCount from "../components/CandidateCount";
-import formatNumber from "../components/FormatNumber";
-import TopExperts from "../components/TopExperts";
+import CandidateCount from "../components/CandidateCount.jsx";
+import formatNumber from "../components/FormatNumber.jsx";
+import TopExperts from "../components/TopExperts.jsx";
 import node from "../assets/node.jpg";
-import Button from "../components/Button";
+import Button from "../components/Button.jsx";
 import { FaGreaterThan } from "react-icons/fa";
 import axios from "axios";
-import TimeDifference from "../TimeDifference";
-import Cards from "../components/Card";
+import TimeDifference from "../TimeDifference.jsx";
+import Cards from "../components/Card.jsx";
 import { useNavigate } from "react-router-dom";
 const Dashboard = () => {
   const navigate = useNavigate();

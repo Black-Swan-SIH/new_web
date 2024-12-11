@@ -1,5 +1,5 @@
 import React from "react";
-import Heading from "./Heading";
+import Heading from "./Heading.jsx";
 import { FaStar } from "react-icons/fa6";
 
 const Review = ({ profileScore, reviews, interview }) => {

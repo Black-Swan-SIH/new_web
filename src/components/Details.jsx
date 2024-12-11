@@ -1,7 +1,7 @@
 import React from "react";
 import { RecoilRoot, useRecoilValue } from "recoil";
-import { userAtom } from "../atoms/name";
-import Det from "./Det";
+import { userAtom } from "../atoms/name.jsx";
+import Det from "./Det.jsx";
 import { fontSize } from "@mui/system";
 
 function Details({userId}) {

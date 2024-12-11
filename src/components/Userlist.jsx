@@ -1,9 +1,9 @@
 import React from "react";
 import "../styles/Userlist.css";
-import Heading from "./Heading";
-import ProgressBar from "./progressBar";
+import Heading from "./Heading.jsx";
+import ProgressBar from "./progressBar.jsx";
 import { useNavigate } from "react-router-dom";
-import Profile from "./profile";
+import Profile from "./profile.jsx";
 
 const Userlist = ({ imageSrc, name, age, work, value,id,text }) => {
   const navigate=useNavigate();

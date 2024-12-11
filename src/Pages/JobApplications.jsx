@@ -1,9 +1,7 @@
 import React from "react";
-import Navbar3 from "../components/Navbar3";
-import Application from "../components/Application";
-import TopSkills from "../components/topSkills";
-import Heading from "../components/Heading";
-import Itemcount from "../components/Itemcount";
+import Application from "../components/Application.jsx";
+import Heading from "../components/Heading.jsx";
+import Itemcount from "../components/Itemcount.jsx";
 
 const JobApplications = () => {
   return (

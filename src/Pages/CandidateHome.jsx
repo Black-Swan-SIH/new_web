@@ -1,8 +1,8 @@
 import React from "react";
-import Navbar3 from "../components/Navbar3";
-import CandidateCards from "../components/candidateCards";
+import Navbar3 from "../components/Navbar3.jsx";
+import CandidateCards from "../components/CandidateCards.jsx";
 import { borderRadius, height } from "@mui/system";
-import Button from "../components/Button";
+import Button from "../components/Button.jsx";
 import { useEffect } from "react";
 
  
