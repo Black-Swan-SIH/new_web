@@ -3,7 +3,7 @@ import Navbar3 from '../components/Navbar3.jsx';
 import { useEffect, useState } from 'react';
 import '../styles/joblist.css';
 import Button from '../components/Button.jsx';
-import '../styles/dropdown.css';
+import '../styles/dropDown.css';
 
 
 function JoblistCandidate({setShowNavbar,height}) {
