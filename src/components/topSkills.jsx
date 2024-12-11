@@ -29,7 +29,6 @@ function TopSkills({value,skill}) {
         >
           {skill}
         </p>
-        {/* Slider container */}
         <span style={{ flexGrow: 1 }}>
           <LinearProgress
             determinate

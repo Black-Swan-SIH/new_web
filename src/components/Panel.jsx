@@ -15,13 +15,22 @@ const Panel = ({
   profileScore,
   reviews,
   interview,
+  onCheckBoxChange,
 }) => {
   const navigate=useNavigate();
-  const handleClick = () => {
-    navigate(`/${text}/${id}`);
+  const [isChecked, setIsChecked] = useState(false);
+
+  const handleCheckboxChange = (event) => {
+    const checked = event.target.checked;
+    setIsChecked(checked);
+      console.log(checked);
+      onCheckBoxChange(id, checked);
   };
+  // const handleClick = () => {
+  //   navigate(`/${text}/${id}`);
+  // };
   return (
-    <div className="flex mb-12 justify-between items-center" onClick={handleClick} style={{ cursor: "pointer" }}>
+    <div className="flex mb-12 justify-between items-center"  style={{ cursor: "pointer" }}>
       <div style={{ flexBasis: "50%" }}>
         <Prof
           imageSrc={imageSrc}
@@ -49,7 +58,12 @@ const Panel = ({
         />
       </div>
       <div style={{display: "flex", alignItems: "center", justifyContent: "center" }}>
-        hey
+      <input
+        type="checkbox"
+        className="custom-checkbox"
+        checked={isChecked}
+        onChange={handleCheckboxChange}
+      />
       </div>
     </div>
   );

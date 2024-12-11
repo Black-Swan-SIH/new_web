@@ -17,6 +17,7 @@ const Candidatelist = ({ head, page }) => {
   const [search, setSearch] = useState("");
   const [sortOption, setSortOption] = useState("");
   const [ageRange, setAgeRange] = useState("all");
+  const [selectedIds, setSelectedIds] = useState([]);
 
   const searchInputRef = useRef(null);
 
@@ -44,8 +45,8 @@ const Candidatelist = ({ head, page }) => {
         endpoint = "candidate";
         list = "candidates";
       } else if (page === "Panel") {
-        endpoint = "panel";
-        list = "panels";
+        endpoint = "expert";
+        list = "experts";
       } else if (page === "Expertlist") {
         endpoint = "expert";
         list = "experts";
@@ -53,14 +54,17 @@ const Candidatelist = ({ head, page }) => {
 
       try {
         const userToken = localStorage.getItem("userToken");
-        const response = await axios.get(`https://sih-backend-xengu.ondigitalocean.app/${endpoint}`, {
-          headers: {
-            Authorization: `Bearer ${userToken}`,
-          },
-          withCredentials: true,
-        });
-        console.log(response.data.data);
-      setFetchedData(response.data.data[list]);
+        const response = await axios.get(
+          `https://sih-backend-xengu.ondigitalocean.app/${endpoint}`,
+          {
+            headers: {
+              Authorization: `Bearer ${userToken}`,
+            },
+            withCredentials: true,
+          }
+        );
+        console.log(response.data.data[list]);
+        setFetchedData(response.data.data[list]);
         setSortedData(response.data.data.experts);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -118,6 +122,41 @@ const Candidatelist = ({ head, page }) => {
     }
     return 0;
   });
+  function capitalizeFirstLetter(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
+
+  const handleCheckboxChange = (id, isChecked) => {
+    console.log(id, isChecked);
+    setSelectedIds((prevSelectedIds) => {
+      if (isChecked) {
+        return [...prevSelectedIds, id];
+      } else {
+        return prevSelectedIds.filter((selectedId) => selectedId !== id);
+      }
+    });
+  };
+
+  const handleSubmit = async () => {
+    try {
+      const userToken = localStorage.getItem("userToken");
+      console.log(selectedIds);
+      await axios.post(
+        "https://sih-backend-xengu.ondigitalocean.app/submit",
+        { selectedIds },
+        {
+          headers: {
+            Authorization: `Bearer ${userToken}`,
+          },
+          withCredentials: true,
+        }
+      );
+      alert("Data submitted successfully!");
+    } catch (error) {
+      console.error("Error submitting data:", error);
+      alert("Error submitting data.");
+    }
+  };
 
   const renderContent = () => {
     if (page === "Candidatelist") {
@@ -130,12 +169,10 @@ const Candidatelist = ({ head, page }) => {
           name={person?.name}
           age={calculateAge(person.dateOfBirth)}
           work={person?.currentPosition}
-          value={Math.round(person?.averageRelevancyScore
-          )}
+          value={Math.round(person?.averageRelevancyScore)}
         />
       ));
-    } 
-    else if(page === "Expertlist") {
+    } else if (page === "Expertlist") {
       return sortFilteredData.map((person) => (
         <Userlist
           key={person?.id}
@@ -148,30 +185,31 @@ const Candidatelist = ({ head, page }) => {
           value={Math.round(person?.averageRelevancyScore)}
         />
       ));
-    }
-    else if (page === "Panel") {
+    } else if (page === "Panel") {
       return sortFilteredData.map((person) => (
         <Panel
           key={person?.id}
           id={person._id}
-          text="panel"
+          text="expert"
           imageSrc={node}
           name={person?.name}
-          unit={person?.unit}
+          pronoun={capitalizeFirstLetter(person?.gender)}
+          experience="Beginner"
+          unit={person?.unit || "1st Reconnaissance Squadron"}
           age={calculateAge(person.dateOfBirth)}
-          pronoun={person?.pronoun}
-          experience={person?.experience}
-          profileScore={Math.round(person?.averageRelevancyScore)}
-          reviews={person?.reviews}
-          interview={person?.interview}
+          onCheckBoxChange={handleCheckboxChange}
         />
       ));
     }
   };
 
   const total = fetchedData.length;
-  const maleCount = fetchedData.filter((user) => user?.gender === "male").length;
-  const femaleCount = fetchedData.filter((user) => user?.gender === "female").length;
+  const maleCount = fetchedData.filter(
+    (user) => user?.gender === "male"
+  ).length;
+  const femaleCount = fetchedData.filter(
+    (user) => user?.gender === "female"
+  ).length;
 
   return (
     <div className="cont">
@@ -197,10 +235,21 @@ const Candidatelist = ({ head, page }) => {
       />
       <div className="my-[40px] w-[60%] h-[0.8px] bg-gray-400"></div>
       <div className="scrollable-container">
-        <div className={page === "Candidatelist" || page === "Expertlist" ? "person-list" : "panel-list"}>
+        <div
+          className={
+            page === "Candidatelist" || page === "Expertlist"
+              ? "person-list"
+              : "panel-list"
+          }
+        >
           {renderContent()}
         </div>
       </div>
+      {page === "Panel" && (
+        <button onClick={handleSubmit} className="submit-button">
+          Submit
+        </button>
+      )}
     </div>
   );
 };
