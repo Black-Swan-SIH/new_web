@@ -1,7 +1,7 @@
 import React from "react";
 import "../styles/Prof.css";
-import Heading from "./Heading";
-import Button from "./Button";
+import Heading from "./Heading.jsx";
+import Button from "./Button.jsx";
 const Prof = ({
   imageSrc,
   name,

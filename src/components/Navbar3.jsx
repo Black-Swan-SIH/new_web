@@ -1,7 +1,7 @@
 import React from "react";
 import racImage from "../assets/rac1.png";
 import racImage1 from "../assets/rac.png";
-import Button from "./Button";
+import Button from "./Button.jsx";
 import { auto } from "@popperjs/core";
 function Navbar3() {
   return (

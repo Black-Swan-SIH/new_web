@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../styles/Nav2.css";
-import Button from "./Button";
+import Button from "./Button.jsx";
 import proicon from "../assets/profile.png";
 import addition from "../assets/addition.svg";
 import { width } from "@mui/system";

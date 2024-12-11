@@ -1,9 +1,8 @@
 import React from "react";
 import { useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
-import Navbar3 from "../components/Navbar3";
-
-import ExpandableDiv from "../components/keySkills";
+import Navbar3 from "../components/Navbar3.jsx";
+import ExpandableDiv from "../components/keySkills.jsx";
 
 
 function Job({setShowNavbar}) {

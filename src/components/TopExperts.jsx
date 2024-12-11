@@ -1,5 +1,5 @@
 import React from 'react'
-import Heading from './Heading'
+import Heading from './Heading.jsx'
 import '../styles/TopExperts.css'
 
 const TopExperts = ({imageSrc,name,expert,score}) => {

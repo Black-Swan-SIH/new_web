@@ -1,5 +1,5 @@
 import React from "react";
-import ExpandableDiv from "./keySkills";
+import ExpandableDiv from "./keySkills.jsx";
 import { useNavigate } from "react-router-dom";
 
 function Job() {

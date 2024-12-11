@@ -1,6 +1,6 @@
 import React from 'react'
-import Navbar3 from '../components/Navbar3'
-import Status from '../components/Status'
+import Navbar3 from '../components/Navbar3.jsx'
+import Status from '../components/Status.jsx'
 
 const Application = () => {
   return (

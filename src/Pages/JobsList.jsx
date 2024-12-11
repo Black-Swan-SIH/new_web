@@ -5,7 +5,6 @@ import Heading from "../components/Heading.jsx";
 import Itemcount from "../components/Itemcount";
 import Boxes from "../components/Boxes.jsx";
 import Button from "../components/Button.jsx";
-import { FaGreaterThan } from "react-icons/fa";
 import axios from "axios";
 import Cards from "../components/Card.jsx";
 import TimeDifference from "../TimeDifference.jsx";

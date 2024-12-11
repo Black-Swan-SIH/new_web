@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import "../styles/SignIn.css";
-import Input from "./Input";
-import Button from "./Button";
-import Heading from "./Heading";
+import Input from "./Input.jsx";
+import Button from "./Button.jsx";
+import Heading from "./Heading.jsx";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 

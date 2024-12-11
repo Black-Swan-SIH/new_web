@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import "../styles/Candidatelist.css";
 import node from "../assets/node.jpg";
 import Heading from "../components/Heading.jsx";
-import Itemcount from "../components/Itemcount";
+import Itemcount from "../components/Itemcount.jsx";
 import Userlist from "../components/Userlist.jsx";
 import formatNumber from "../components/FormatNumber.jsx";
 import Boxes from "../components/Boxes.jsx";

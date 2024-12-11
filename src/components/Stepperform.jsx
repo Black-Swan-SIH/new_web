@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import Input from "./Input";
+import Input from "./Input.jsx";
 import "../styles/Stepperform.css";
-import Heading from "./Heading";
-import Button from "./Button";
+import Heading from "./Heading.jsx";
+import Button from "./Button.jsx";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 

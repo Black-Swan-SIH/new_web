@@ -3,12 +3,12 @@ import { CircularProgressbarWithChildren } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import "../App.css";
 import "../styles/custom.css";
-import Details from "./Details";
-import Skills from "./Skills";
+// import Details from "./Details.jsx";
+// import Skills from "./Skills.jsx";
 import { RecoilRoot } from "recoil";
-import TopSkills from "./topSkills";
-import Cards from "./Card";
-import Prof from "./Prof";
+import TopSkills from "./topSkills.jsx";
+import Cards from "./Card.jsx";
+import Prof from "./Prof.jsx";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 

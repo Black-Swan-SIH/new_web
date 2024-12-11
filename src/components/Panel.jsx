@@ -1,6 +1,6 @@
 import React from "react";
-import Prof from "./Prof";
-import Review from "./Review";
+import Prof from "./Prof.jsx";
+import Review from "./Review.jsx";
 import { useNavigate } from "react-router-dom";
 
 const Panel = ({
