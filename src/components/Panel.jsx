@@ -31,7 +31,7 @@ const Panel = ({
       console.log(name)
       onCheckBoxChange(id, checked,name);
   };
- 
+ console.log(name)
   return (
     <div className="flex mb-12 justify-between items-center"  style={{ cursor: "pointer", paddingLeft:"25px", paddingRight:"25px", paddingTop:"5px", paddingBottom:"5px", borderRadius:"10px" , boxShadow: '0px 6px 15px rgba(0, 0, 0, 0.2)', backgroundColor:"white", background: "white", minWidth:"1000px"}}>
       <div style={{ flexBasis: "50%", marginTop:"10px"}}>

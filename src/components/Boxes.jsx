@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../styles/Boxes.css";
 import Button from "./Button.jsx";
+import axios from "axios";
 
 const Boxes = ({
   children,
@@ -15,8 +16,8 @@ const Boxes = ({
   page,
   selectedIIT,
   onIITChange,
+  onDataFetched,
 }) => {
-  // Arrays for suggestions
   const departments = [
     "Computer Science",
     "Mechanical",
@@ -33,10 +34,17 @@ const Boxes = ({
   ];
 
   // States for managing suggestions and input values
+  const [selectedValue, setSelectedValue] = useState(selectedIIT);
   const [departmentInput, setDepartmentInput] = useState("");
   const [expertiseInput, setExpertiseInput] = useState("");
   const [filteredDepartments, setFilteredDepartments] = useState([]);
   const [filteredExpertise, setFilteredExpertise] = useState([]);
+
+  const handleIITChange = (event) => {
+    const value = event.target.value;
+    setSelectedValue(value);
+    onIITChange(event); // Call the parent handler to update the parent state
+  };
 
   // Handlers for department input
   const handleDepartmentChange = (e) => {
@@ -56,6 +64,30 @@ const Boxes = ({
     setFilteredExpertise(
       expertise.filter((exp) => exp.toLowerCase().includes(value.toLowerCase()))
     );
+  };
+
+  const handleSubmit = async () => {
+    try {
+      const userToken = localStorage.getItem("userToken");
+      const response = await axios.post(
+        'https://lobster-app-b66lv.ondigitalocean.app/extraexperts/search',
+        {
+          college: selectedValue,
+          department: departmentInput,
+          expertise: expertiseInput,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${userToken}`,
+          },
+          withCredentials: true,
+        }
+      );
+      console.log('Data submitted successfully:', response.data.data.experts);
+      onDataFetched(response.data.data.experts);
+    } catch (error) {
+      console.error('Error submitting data:', error);
+    }
   };
 
   return (
@@ -99,13 +131,14 @@ const Boxes = ({
         {page === "Panel" ? (
           <select
             value={selectedIIT}
-            onChange={onIITChange}
+            onChange={handleIITChange}
             className="sort-dropdown"
           >
             <option value="all">All</option>
-            <option value="IIT BOMBAY">IIT BOMBAY</option>
-            <option value="IIT KANPUR">IIT KANPUR</option>
-            <option value="IIT DELHI">IIT DELHI</option>
+            <option value="IIT Bombay">IIT Bombay</option>
+            <option value="IIT Kanpur">IIT Kanpur</option>
+            <option value="IIT Delhi">IIT Delhi</option>
+            <option value="TIET">IIT TIET</option>
           </select>
         ) : (
           <select
@@ -127,13 +160,13 @@ const Boxes = ({
           <input
             type="text"
             placeholder="Department"
-            value={expertiseInput}
-            onChange={handleExpertiseChange}
+            value={departmentInput}
+            onChange={handleDepartmentChange}
           />
-          {expertiseInput && (
+          {departmentInput && (
             <ul className="suggestions">
-              {filteredExpertise.map((exp, index) => (
-                <li key={index} onClick={() => setExpertiseInput(exp)}>
+              {filteredDepartments.map((exp, index) => (
+                <li key={index} onClick={() => setDepartmentInput(exp)}>
                   {exp}
                 </li>
               ))}
@@ -176,6 +209,7 @@ const Boxes = ({
         width: "150px"
       }}>
         <Button
+        onClick={handleSubmit}
           bgcolor="rgba(190, 190, 190, 1)"
           color="black"
           fontWeight="500"

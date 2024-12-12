@@ -200,8 +200,8 @@ const Candidatelist = ({ head, page }) => {
           id={person.expertId || person._id}
           text="expert"
           name={person?.name}
-          profileScore={Math.round(person?.profileScore || person?.averageProfileScore)}
-          reviews={person?.reviews || person?.averageFeedbackScore}
+          profileScore={Math.round(person?.profileScore || person?.averageProfileScore) || 0}
+          reviews={person?.reviews || person?.averageFeedbackScore || 0}
           experience="Beginner"
           department={person?.department}
           onCheckBoxChange={handleCheckboxChange}
