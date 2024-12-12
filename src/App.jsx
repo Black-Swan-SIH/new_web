@@ -63,7 +63,7 @@ const handleLogout = () => {
         <Route path="/list/job" element={<JobsList head="Jobs" page="Userlist"/>}/>
         <Route path="/form" element={<StepperForm/>}/>
         <Route path="/" element={<CandidateHome setShowNavbar={setShowNavbar}/>}/>
-        <Route path="/jobs" element={<JoblistCandidate setShowNavbar={setShowNavbar}/>}/>
+        <Route path="/jobs" element={<JoblistCandidate setShowNavbar={setShowNavbar} jobIds={["675528691affdfdb711f15ef", "675528691affdfdb711f15ef", "675528691affdfdb711f15ef"]} />}/>
         <Route path="/history" element={<JobApplications setShowNavbar={setShowNavbar}/>}/>
         <Route path="/job" element={<JobCandidate setShowNavbar={setShowNavbar}/>}/>
 

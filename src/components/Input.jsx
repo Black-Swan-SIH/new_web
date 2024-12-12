@@ -12,6 +12,8 @@ const Input = ({
   borderRadius = "4px", // Default border-radius
   boxShadow = "0px 2px 4px rgba(0, 0, 0, 0.1)", // Default box-shadow
   placeholderColor,
+  placeholder
+  
 }) => {
   const placeholderClass = placeholderColor ? `placeholder-${placeholderColor}` : "";
 
@@ -26,6 +28,7 @@ const Input = ({
         name={name}
         value={value}
         onChange={onChange}
+        placeholder={placeholder}
         style={{
           color: color,
           background: background,
