@@ -196,12 +196,14 @@ const Candidatelist = ({ head, page }) => {
       return (panelData.length > 0 ? panelData : sortFilteredData).map((person) => (
         <Panel
           key={person?.expertId || person?.id}
+          expertise={person?.expertise}
           id={person.expertId || person._id}
           text="expert"
           name={person?.name}
           profileScore={Math.round(person?.profileScore || person?.averageProfileScore)}
           reviews={person?.reviews || person?.averageFeedbackScore}
           experience="Beginner"
+          department={person?.department}
           onCheckBoxChange={handleCheckboxChange}
         />
       ));
@@ -217,7 +219,7 @@ const Candidatelist = ({ head, page }) => {
   ).length;
 
   return (
-    <div className="cont">
+    <div className="cont" style={{backgroundColor:"#E5E5E5"}}>
       <div className="head">
         <Heading fontSize="40px" fontWeight="600" color="var(--text-color9)">
           {head}

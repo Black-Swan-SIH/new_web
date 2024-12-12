@@ -5,17 +5,13 @@ import Button from "./Button.jsx";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const Prof = ({
-  imageSrc,
-  name = "N/A", // Default value to avoid undefined
-  unit = "N/A", // Default value
-  age = "N/A", // Default value
-  pronoun = "N/A", // Default value
-  experience = "N/A", // Default value
-  height,
-  width,
+const Prof1 = ({
+  name,
+  department,
+  profileScore,
+  experience,
+  expertise,
   gap,
-  borderRadius,
   nameFontSize,
   nameColor,
   FontSize1,
@@ -31,11 +27,11 @@ const Prof = ({
   const handleEditProfile = async () => {
     try {
       const userToken = localStorage.getItem("userToken");
-
       if (!userToken) {
-        throw new Error("User token is missing. Please log in again.");
+        alert("User token is missing. Please log in.");
+        return;
       }
-
+      
       const response = await axios.get(
         `https://lobster-app-b66lv.ondigitalocean.app/subject/${subject}/sorteddata`,
         {
@@ -48,7 +44,6 @@ const Prof = ({
 
       const data = response.data;
       console.log(data); // Handle the fetched data as needed
-
       navigate(`/candidate/${userId}/panel`, { state: { userId } });
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -58,16 +53,6 @@ const Prof = ({
 
   return (
     <div className="flex" style={{ gap: gap }}>
-      <div
-        className="image-pcontainer"
-        style={{ height: height, width: width, borderRadius: borderRadius }}
-      >
-        <img
-          src={imageSrc || "https://via.placeholder.com/150"} // Fallback for image
-          alt="profile"
-          className="pimage"
-        />
-      </div>
       <div style={{ marginTop: marginTop }}>
         {display ? (
           <Button
@@ -87,7 +72,7 @@ const Prof = ({
         )}
 
         <Heading fontSize={nameFontSize} fontWeight="600" color={nameColor}>
-          {name}
+          {name || "Name not available"}
         </Heading>
 
         <div className="flex gap-8" style={{ marginBottom: marginBottom }}>
@@ -97,14 +82,14 @@ const Prof = ({
               fontWeight="500"
               color="var(--text-color23)"
             >
-              Unit:
+              Department
             </Heading>
             <Heading
               fontSize={FontSize2}
               fontWeight="600"
               color="var(--text-color24)"
             >
-              {unit}
+              {department || "N/A"}
             </Heading>
           </div>
 
@@ -114,35 +99,36 @@ const Prof = ({
               fontWeight="500"
               color="var(--text-color23)"
             >
-              Age:
+              Profile score:
             </Heading>
             <Heading
               fontSize={FontSize2}
               fontWeight="600"
               color="var(--text-color24)"
             >
-              {age}
+              {profileScore || "N/A"}
             </Heading>
           </div>
         </div>
 
         <div className="flex gap-8">
-          <div className="flex gap-3">
-            <Heading
-              fontSize={FontSize1}
-              fontWeight="500"
-              color="var(--text-color23)"
-            >
-              Pronouns:
-            </Heading>
-            <Heading
-              fontSize={FontSize2}
-              fontWeight="600"
-              color="var(--text-color24)"
-            >
-              {pronoun}
-            </Heading>
-          </div>
+        <div className="flex gap-3">
+  <Heading
+    fontSize={FontSize1}
+    fontWeight="500"
+    color="var(--text-color23)"
+  >
+    Expertise
+  </Heading>
+  <div style={{width: "40vw", fontSize: "12px", fontWeight: "500", overflow: "hidden" }}>
+    {expertise && expertise.length > 0 ? (
+      <p>{expertise.join(", ")}</p>
+    ) : (
+      <p>No items available.</p>
+    )}
+  </div>
+</div>
+
 
           <div className="flex gap-3 justify-start align-bottom">
             <Heading
@@ -157,7 +143,7 @@ const Prof = ({
               fontWeight="600"
               color="var(--text-color24)"
             >
-              {experience}
+              {experience || "N/A"}
             </Heading>
           </div>
         </div>
@@ -183,4 +169,4 @@ const Prof = ({
   );
 };
 
-export default Prof;
+export default Prof1;

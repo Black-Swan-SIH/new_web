@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
 import "../styles/Panel.css";
-import Prof from "./Prof.jsx";
+
 import Review from "./Review.jsx";
 import { useNavigate } from "react-router-dom";
+import Prof1 from "./Prof1.jsx";
+
 
 const Panel = ({
   id,
   text,
-  imageSrc,
   name,
+  department,
+  expertise,
   unit,
   age,
   pronoun,
@@ -28,20 +31,19 @@ const Panel = ({
       console.log(name)
       onCheckBoxChange(id, checked,name);
   };
-  // const handleClick = () => {
-  //   navigate(`/${text}/${id}`);
-  // };
+ 
   return (
-    <div className="flex mb-12 justify-between items-center"  style={{ cursor: "pointer" }}>
-      <div style={{ flexBasis: "50%" }}>
-        <Prof
-          imageSrc={imageSrc}
+    <div className="flex mb-12 justify-between items-center"  style={{ cursor: "pointer", paddingLeft:"25px", paddingRight:"25px", paddingTop:"5px", paddingBottom:"5px", borderRadius:"10px" , boxShadow: '0px 6px 15px rgba(0, 0, 0, 0.2)', backgroundColor:"white", minWidth:"1000px"}}>
+      <div style={{ flexBasis: "50%", marginTop:"10px"}}>
+        <Prof1
+         
           name={name}
           unit={unit}
+          profileScore={profileScore}
           age={age}
           pronoun={pronoun}
           experience={experience}
-          height="12vh"
+          height="60px"
           width="13vh"
           gap="4em"
           borderRadius="16%"
@@ -50,15 +52,12 @@ const Panel = ({
           FontSize1="13px"
           FontSize2="13px"
           marginTop={-20}
+          department={department}
+          expertise={expertise}
+          
         />
       </div>
-      <div style={{ flexBasis: "30%" }}>
-        <Review
-          profileScore={profileScore}
-          reviews={reviews}
-          interview={interview}
-        />
-      </div>
+
       <div style={{display: "flex", alignItems: "center", justifyContent: "center" }}>
       <input
         type="checkbox"
