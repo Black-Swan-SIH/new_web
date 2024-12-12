@@ -14,9 +14,9 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Button from "../components/Button.jsx";
 
 const Candidatelist = ({ head, page }) => {
-  const navigate=useNavigate();
-  const location =useLocation();
-  const userId=location.state?.userId;
+  const navigate = useNavigate();
+  const location = useLocation();
+  const userId = location.state?.userId;
   const currentYear = new Date().getFullYear();
   const [fetchedData, setFetchedData] = useState([]);
   const [sortedData, setSortedData] = useState([]);
@@ -26,9 +26,9 @@ const Candidatelist = ({ head, page }) => {
   const [selectedIIT, setSelectedIIT] = useState("all");
   const [expertIds, setExpertIds] = useState([]);
   const [selectedNames, setSelectedNames] = useState([]);
+  const [panelData, setPanelData] = useState([]);
 
   const searchInputRef = useRef(null);
-
   // Keyboard Shortcut for Search Focus
   useEffect(() => {
     const handleKeyPress = (event) => {
@@ -62,15 +62,12 @@ const Candidatelist = ({ head, page }) => {
 
       try {
         const userToken = localStorage.getItem("userToken");
-        const response = await axios.get(
-          `${URL}${endpoint}`,
-          {
-            headers: {
-              Authorization: `Bearer ${userToken}`,
-            },
-            withCredentials: true,
-          }
-        );
+        const response = await axios.get(`${URL}${endpoint}`, {
+          headers: {
+            Authorization: `Bearer ${userToken}`,
+          },
+          withCredentials: true,
+        });
         console.log(response.data.data[list]);
         setFetchedData(response.data.data[list]);
         setSortedData(response.data.data.experts);
@@ -99,9 +96,7 @@ const Candidatelist = ({ head, page }) => {
   // Filter and Sort Data
   const filteredData = fetchedData
     .filter((person) =>
-      `${person?.name}`
-        .toLowerCase()
-        .includes(search.toLowerCase())
+      `${person?.name}`.toLowerCase().includes(search.toLowerCase())
     )
     .filter((person) => {
       if (ageRange === "all") return true;
@@ -110,7 +105,8 @@ const Candidatelist = ({ head, page }) => {
       if (ageRange === "21-30") return age >= 21 && age <= 30;
       if (ageRange === "31-40") return age >= 31 && age <= 40;
       return true;
-    }).filter((person) => {
+    })
+    .filter((person) => {
       if (selectedIIT === "all") return true;
       return person.institution?.toLowerCase() === selectedIIT.toLowerCase();
     });
@@ -162,7 +158,7 @@ const Candidatelist = ({ head, page }) => {
           withCredentials: true,
         }
       );
-      navigate(`/candidate/${userId}`,{state:{expertIds}});
+      navigate(`/candidate/${userId}`, { state: { expertIds } });
     } catch (error) {
       console.error("Error submitting data:", error);
       alert("Error submitting data.");
@@ -197,21 +193,16 @@ const Candidatelist = ({ head, page }) => {
         />
       ));
     } else if (page === "Panel") {
-      return sortFilteredData.map((person) => (
+      return (panelData.length > 0 ? panelData : sortFilteredData).map((person) => (
         <Panel
-          key={person?.id}
-          id={person._id}
+          key={person?.expertId || person?.id}
+          id={person.expertId || person._id}
           text="expert"
-          imageSrc={node}
           name={person?.name}
-          profileScore={Math.round(person?.averageProfileScore)}
-          reviews={person?.averageFeedbackScore}
-          pronoun={capitalizeFirstLetter(person?.gender)}
+          profileScore={Math.round(person?.profileScore || person?.averageProfileScore)}
+          reviews={person?.reviews || person?.averageFeedbackScore}
           experience="Beginner"
-          unit={person?.unit || "1st Reconnaissance Squadron"}
-          age={calculateAge(person.dateOfBirth)}
           onCheckBoxChange={handleCheckboxChange}
-          interview={person?.currentDepartment}
         />
       ));
     }
@@ -247,8 +238,9 @@ const Candidatelist = ({ head, page }) => {
         searchInputRef={searchInputRef}
         handleFocus={handleFocus}
         page={page}
-        selectedIIT={selectedIIT} // Pass selectedIIT
-  onIITChange={(e) => setSelectedIIT(e.target.value)}
+        selectedIIT={selectedIIT}
+        onIITChange={(e) => setSelectedIIT(e.target.value)}
+        onDataFetched={setPanelData}
       />
       <div className="my-[40px] w-[60%] h-[0.8px] bg-gray-400"></div>
       <div className="scrollable-container">
@@ -264,16 +256,16 @@ const Candidatelist = ({ head, page }) => {
       </div>
       {page === "Panel" && (
         <Button
-        onClick={handleSubmit}
-        bgcolor="var(--bg-color2)"
-        color="var(--text-color22)"
-        fontWeight="500"
-        fontSize="14px"
-        borderRadius="8px"
-        padding="7px 12px"
-      >
-        Submit
-      </Button>
+          onClick={handleSubmit}
+          bgcolor="var(--bg-color2)"
+          color="var(--text-color22)"
+          fontWeight="500"
+          fontSize="14px"
+          borderRadius="8px"
+          padding="7px 12px"
+        >
+          Submit
+        </Button>
       )}
     </div>
   );

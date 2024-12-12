@@ -167,6 +167,7 @@ const Dashboard = () => {
               Recent job openings
             </Heading>
             {displayedJobs.map((job, index) => (
+              console.log(job),
               <Cards
                 key={index}
                 userId={job._id}
