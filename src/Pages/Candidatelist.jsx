@@ -10,15 +10,21 @@ import { handleFocus } from "../components/Functions.jsx";
 import Panel from "../components/Panel.jsx";
 import axios from "axios";
 import URL from "../URL.jsx";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Candidatelist = ({ head, page }) => {
+  const navigate=useNavigate();
+  const location =useLocation();
+  const userId=location.state?.userId;
   const currentYear = new Date().getFullYear();
   const [fetchedData, setFetchedData] = useState([]);
   const [sortedData, setSortedData] = useState([]);
   const [search, setSearch] = useState("");
   const [sortOption, setSortOption] = useState("");
   const [ageRange, setAgeRange] = useState("all");
-  const [selectedIds, setSelectedIds] = useState([]);
+  const [selectedIIT, setSelectedIIT] = useState("all");
+  const [expertIds, setExpertIds] = useState([]);
+  const [selectedNames, setSelectedNames] = useState([]);
 
   const searchInputRef = useRef(null);
 
@@ -92,7 +98,7 @@ const Candidatelist = ({ head, page }) => {
   // Filter and Sort Data
   const filteredData = fetchedData
     .filter((person) =>
-      `${person?.first_name} ${person?.last_name}`
+      `${person?.name}`
         .toLowerCase()
         .includes(search.toLowerCase())
     )
@@ -103,6 +109,9 @@ const Candidatelist = ({ head, page }) => {
       if (ageRange === "21-30") return age >= 21 && age <= 30;
       if (ageRange === "31-40") return age >= 31 && age <= 40;
       return true;
+    }).filter((person) => {
+      if (selectedIIT === "all") return true;
+      return person.institution?.toLowerCase() === selectedIIT.toLowerCase();
     });
 
   const sortFilteredData = filteredData.sort((a, b) => {
@@ -129,7 +138,7 @@ const Candidatelist = ({ head, page }) => {
 
   const handleCheckboxChange = (id, isChecked) => {
     console.log(id, isChecked);
-    setSelectedIds((prevSelectedIds) => {
+    setExpertIds((prevSelectedIds) => {
       if (isChecked) {
         return [...prevSelectedIds, id];
       } else {
@@ -141,10 +150,10 @@ const Candidatelist = ({ head, page }) => {
   const handleSubmit = async () => {
     try {
       const userToken = localStorage.getItem("userToken");
-      console.log(selectedIds);
+      console.log(expertIds);
       await axios.post(
-        "https://sih-backend-xengu.ondigitalocean.app/submit",
-        { selectedIds },
+        `${URL}candidate/${userId}/panel`,
+        { expertIds },
         {
           headers: {
             Authorization: `Bearer ${userToken}`,
@@ -152,7 +161,7 @@ const Candidatelist = ({ head, page }) => {
           withCredentials: true,
         }
       );
-      alert("Data submitted successfully!");
+      navigate(`/candidate/${userId}`,{state:{expertIds}});
     } catch (error) {
       console.error("Error submitting data:", error);
       alert("Error submitting data.");
@@ -233,6 +242,9 @@ const Candidatelist = ({ head, page }) => {
         onAgeChange={(e) => setAgeRange(e.target.value)}
         searchInputRef={searchInputRef}
         handleFocus={handleFocus}
+        page={page}
+        selectedIIT={selectedIIT} // Pass selectedIIT
+  onIITChange={(e) => setSelectedIIT(e.target.value)}
       />
       <div className="my-[40px] w-[60%] h-[0.8px] bg-gray-400"></div>
       <div className="scrollable-container">

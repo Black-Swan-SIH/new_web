@@ -24,7 +24,7 @@ const JobsList = ({ head }) => {
       const userToken = localStorage.getItem("userToken");
       try {
         const response = await axios.get(
-          "https://sih-backend-xengu.ondigitalocean.app/subject",
+          "https://lobster-app-b66lv.ondigitalocean.app/subject",
           {
             headers: {
               Authorization: `Bearer ${userToken}`, // Add the token to the Authorization header

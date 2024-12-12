@@ -24,7 +24,7 @@ const Dashboard = () => {
 
       try {
         const response1 = await axios.get(
-          "https://sih-backend-xengu.ondigitalocean.app/candidate",
+          "https://lobster-app-b66lv.ondigitalocean.app/candidate",
           {
             headers: {
               Authorization: `Bearer ${userToken}`, // Add the token to the Authorization header
@@ -34,7 +34,7 @@ const Dashboard = () => {
         );
 
         const response2 = await axios.get(
-          "https://sih-backend-xengu.ondigitalocean.app/expert",
+          "https://lobster-app-b66lv.ondigitalocean.app/expert",
           {
             headers: {
               Authorization: `Bearer ${userToken}`, // Add the token to the Authorization header
@@ -44,7 +44,7 @@ const Dashboard = () => {
         );
 
         const response3 = await axios.get(
-          "https://sih-backend-xengu.ondigitalocean.app/subject",
+          "https://lobster-app-b66lv.ondigitalocean.app/subject",
           {
             headers: {
               Authorization: `Bearer ${userToken}`, // Add the token to the Authorization header
@@ -172,7 +172,6 @@ const Dashboard = () => {
                 imageSrc={job.imageSrc ? job.imageSrc : node}
                 backgColor="rgba(142, 183, 168, 1)"
                 jobs={job.title}
-                applications={job.applications.length}
                 open={<TimeDifference timestamp={job.createdAt} />}
               />
             ))}

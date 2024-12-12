@@ -38,8 +38,8 @@ const Modal = ({ onClose, isLogin, setIsLogin }) => {
     setLoading(true);
     try {
       const url = isLogin
-        ? "https://sih-backend-xengu.ondigitalocean.app/admin/signin"
-        : "https://sih-backend-xengu.ondigitalocean.app/admin/signin";
+        ? "https://lobster-app-b66lv.ondigitalocean.app/admin/signin"
+        : "https://lobster-app-b66lv.ondigitalocean.app/admin/signin";
 
       const response = await axios.post(
         url,

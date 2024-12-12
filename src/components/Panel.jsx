@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../styles/Panel.css";
 import Prof from "./Prof.jsx";
 import Review from "./Review.jsx";
@@ -24,8 +24,9 @@ const Panel = ({
   const handleCheckboxChange = (event) => {
     const checked = event.target.checked;
     setIsChecked(checked);
-      console.log(checked);
-      onCheckBoxChange(id, checked);
+      console.log(id);
+      console.log(name)
+      onCheckBoxChange(id, checked,name);
   };
   // const handleClick = () => {
   //   navigate(`/${text}/${id}`);
