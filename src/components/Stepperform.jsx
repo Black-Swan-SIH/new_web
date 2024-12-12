@@ -24,9 +24,7 @@ const StepperForm = () => {
     { degree: "", field: "", startDate: "", endDate: "", institute: "" },
   ]);
 
-  const [skills, setSkills] = useState([
-    { skill: "" },  // Initial skill object with an empty string
-  ]);
+  const [skills, setSkills] = useState([{ skill: "", years: 0 }]);
 
   const handleExperienceChange = (index, field, value) => {
     const updatedExperience = [...experience];
@@ -39,10 +37,10 @@ const StepperForm = () => {
     updatedEducation[index][field] = value;
     setEducation(updatedEducation);
   };
-  
-  const handleSkillChange = (index, value) => {
+
+  const handleSkillChange = (index, field, value) => {
     const updatedSkills = [...skills];
-    updatedSkills[index].skill = value;
+    updatedSkills[index][field] = value;
     setSkills(updatedSkills);
   };
 
@@ -67,13 +65,13 @@ const StepperForm = () => {
   };
 
   const addSkill = () => {
-    setSkills([...skills, { skill: "" }]); // Adding an empty skill object
+    setSkills([...skills, { skill: "", years: 0 }]);
   };
 
   // Removing a skill entry
   const removeSkill = (index) => {
     const updatedSkills = [...skills];
-    updatedSkills.splice(index, 1);  // Removing skill at the specified index
+    updatedSkills.splice(index, 1); // Removing skill at the specified index
     setSkills(updatedSkills);
   };
 
@@ -103,13 +101,14 @@ const StepperForm = () => {
       ...formData,
       [name]: value,
     });
+    console.log(name, value);
   };
 
   const handleSubmit = async () => {
     try {
       const payload = {
         ...formData,
-        skills: skills.map(skill => skill.skill.trim()),
+        skills: skills.map((skill) => skill.skill.trim()),
         experience,
         education,
       };
@@ -121,7 +120,7 @@ const StepperForm = () => {
         {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${userToken}`,  // Include your token here
+            Authorization: `Bearer ${userToken}`, // Include your token here
           },
           withCredentials: true,
         }
@@ -148,8 +147,8 @@ const StepperForm = () => {
   };
 
   return (
-    <div className="steppercontainer" style={{backgroundColor:""}}>
-      <div className="flex justify-between" style={{marginBottom:"5px"}}>
+    <div className="steppercontainer" style={{ backgroundColor: "" }}>
+      <div className="flex justify-between" style={{ marginBottom: "5px" }}>
         <Heading fontSize="16px" fontWeight="600">
           Personal
         </Heading>
@@ -210,7 +209,12 @@ const StepperForm = () => {
             <Heading fontSize="15px" fontWeight="500">
               Gender
             </Heading>
-            <select style={{fontSize:"15px", fontWeight:"500", border:"1px grey solid"}}
+            <select
+              style={{
+                fontSize: "15px",
+                fontWeight: "500",
+                border: "1px grey solid",
+              }}
               name="gender"
               value={formData.gender}
               onChange={handleChange}
@@ -234,15 +238,39 @@ const StepperForm = () => {
               className="stepperinput"
             />
 
-<Heading fontSize="15px" fontWeight="500">Skills</Heading>
-            {skills.map((skill, index) => (
+            <Heading fontSize="15px" fontWeight="500">
+              Skills
+            </Heading>
+            {skills.map((skillObj, index) => (
               <div key={index} className="skill-section">
+                {/* Input for skill name */}
                 <Input
                   type="text"
-                  value={skill.skill}
-                  onChange={(e) => handleSkillChange(index, e.target.value)}
+                  placeholder="Enter skill"
+                  value={skillObj.skill}
+                  onChange={(e) =>
+                    handleSkillChange(index, "skill", e.target.value)
+                  }
                   className="stepperinput"
                 />
+
+                {/* Input for years of experience */}
+                <Input
+                  type="number"
+                  placeholder="Years of experience"
+                  value={skillObj.years}
+                  onChange={(e) =>
+                    handleSkillChange(
+                      index,
+                      "years",
+                      parseInt(e.target.value, 10)
+                    )
+                  }
+                  className="stepperinput"
+                  min="0"
+                />
+
+                {/* Button to remove the skill */}
                 <button
                   onClick={() => removeSkill(index)}
                   className="remove-button"
@@ -255,7 +283,7 @@ const StepperForm = () => {
               Add Another Skill
             </button>
 
-<Heading fontSize="15px" fontWeight="500">
+            <Heading fontSize="15px" fontWeight="500">
               Current Position
             </Heading>
             <Input
@@ -266,7 +294,7 @@ const StepperForm = () => {
               className="stepperinput"
             />
 
-<Heading fontSize="15px" fontWeight="500">
+            <Heading fontSize="15px" fontWeight="500">
               Current Department
             </Heading>
             <Input
@@ -283,12 +311,12 @@ const StepperForm = () => {
           <div>
             {experience.map((work, index) => (
               <div key={index} className="work-experience-section">
-                <div style={{marginBottom:"10px"}}>
-                <Heading fontSize="15px" fontWeight="500" >
-                  Position
-                </Heading>
+                <div style={{ marginBottom: "10px" }}>
+                  <Heading fontSize="15px" fontWeight="500">
+                    Position
+                  </Heading>
                 </div>
-              
+
                 <Input
                   type="text"
                   value={work.position}
@@ -297,12 +325,12 @@ const StepperForm = () => {
                   }
                   className="stepperinput"
                 />
-                  <div style={{marginBottom:"10px"}}>
+                <div style={{ marginBottom: "10px" }}>
                   <Heading fontSize="15px" fontWeight="500">
-                  Department
-                </Heading>
-                  </div>
-              
+                    Department
+                  </Heading>
+                </div>
+
                 <Input
                   type="text"
                   value={work.department}
@@ -311,12 +339,12 @@ const StepperForm = () => {
                   }
                   className="stepperinput"
                 />
-                  <div style={{marginBottom:"10px"}}>
+                <div style={{ marginBottom: "10px" }}>
                   <Heading fontSize="15px" fontWeight="500">
-                  Start Date
-                </Heading>
-                  </div>
-              
+                    Start Date
+                  </Heading>
+                </div>
+
                 <Input
                   type="date"
                   value={work.startDate}
@@ -325,15 +353,16 @@ const StepperForm = () => {
                   }
                   className="stepperinput"
                 />
-                <div style={{
-                  marginBottom: "10px"
-                }}>
-                    <Heading fontSize="15px" fontWeight="500" >
-                  End Date
-                </Heading> 
+                <div
+                  style={{
+                    marginBottom: "10px",
+                  }}
+                >
+                  <Heading fontSize="15px" fontWeight="500">
+                    End Date
+                  </Heading>
                 </div>
-                
-                
+
                 <Input
                   type="date"
                   value={work.endDate}
@@ -342,14 +371,16 @@ const StepperForm = () => {
                   }
                   className="stepperinput"
                 />
-                  <div style={{
-                  marginBottom:"10px"
-                }}>
+                <div
+                  style={{
+                    marginBottom: "10px",
+                  }}
+                >
                   <Heading fontSize="15px" fontWeight="500">
-                  Company Name
-                </Heading>
+                    Company Name
+                  </Heading>
                 </div>
-                
+
                 <Input
                   type="text"
                   value={work.companyName}
@@ -363,7 +394,7 @@ const StepperForm = () => {
                   type="button"
                   onClick={() => removeExperience(index)}
                   className="remove-button"
-                  style={{marginBottom:"15px"}}
+                  style={{ marginBottom: "15px" }}
                 >
                   Remove Experience
                 </button>
@@ -380,12 +411,12 @@ const StepperForm = () => {
           <>
             {education.map((edu, index) => (
               <div key={index} className="education-section">
-                <div style={{marginBottom:"10px"}}>
-                <Heading fontSize="15px" fontWeight="500">
-                  Degree
-                </Heading>
+                <div style={{ marginBottom: "10px" }}>
+                  <Heading fontSize="15px" fontWeight="500">
+                    Degree
+                  </Heading>
                 </div>
-            
+
                 <Input
                   type="text"
                   value={edu.degree}
@@ -394,12 +425,12 @@ const StepperForm = () => {
                   }
                   className="stepperinput"
                 />
-                  <div style={{marginBottom:"10px"}}>
+                <div style={{ marginBottom: "10px" }}>
                   <Heading fontSize="15px" fontWeight="500">
-                  Field
-                </Heading>
-                  </div>
-                
+                    Field
+                  </Heading>
+                </div>
+
                 <Input
                   type="text"
                   value={edu.field}
@@ -408,13 +439,13 @@ const StepperForm = () => {
                   }
                   className="stepperinput"
                 />
-                
-                  <div style={{marginBottom:"10px"}}>
+
+                <div style={{ marginBottom: "10px" }}>
                   <Heading fontSize="15px" fontWeight="500">
-                  Start Date
-                </Heading>
-                  </div>
-               
+                    Start Date
+                  </Heading>
+                </div>
+
                 <Input
                   type="date"
                   value={edu.startDate}
@@ -423,12 +454,12 @@ const StepperForm = () => {
                   }
                   className="stepperinput"
                 />
-                   <div style={{marginBottom:"10px"}}>
-                   <Heading fontSize="15px" fontWeight="500">
-                  End Date
-                </Heading>
-                   </div>
-              
+                <div style={{ marginBottom: "10px" }}>
+                  <Heading fontSize="15px" fontWeight="500">
+                    End Date
+                  </Heading>
+                </div>
+
                 <Input
                   type="date"
                   value={edu.endDate}
@@ -437,12 +468,12 @@ const StepperForm = () => {
                   }
                   className="stepperinput"
                 />
-                    <div style={{marginBottom:"10px"}}>
-                    <Heading fontSize="15px" fontWeight="500">
-                  Institute
-                </Heading>
-                    </div>
-            
+                <div style={{ marginBottom: "10px" }}>
+                  <Heading fontSize="15px" fontWeight="500">
+                    Institute
+                  </Heading>
+                </div>
+
                 <Input
                   type="text"
                   value={edu.institute}
