@@ -167,8 +167,10 @@ const Dashboard = () => {
               Recent job openings
             </Heading>
             {displayedJobs.map((job, index) => (
+              console.log(job),
               <Cards
                 key={index}
+                userId={job._id}
                 imageSrc={job.imageSrc ? job.imageSrc : node}
                 backgColor="rgba(142, 183, 168, 1)"
                 jobs={job.title}

@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ExpandableDiv from "./keySkills.jsx";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function Job() {
   const renderCircles = (count) => {
@@ -18,17 +19,45 @@ function Job() {
   };
 
   const navigate = useNavigate();
+  const location = useLocation();
+  const userId = location.state?.userId;
+  const [userData, setUserData] = useState(null);
 
   const handleClick = () => {
-    navigate("/candidatelist"); // Replace '/another-page' with your route
+    navigate("/admin/list/experts");
   };
-
-  const navigate1 = useNavigate();
 
   const handleClick1 = () => {
-    navigate1(" /expertlist"); // Replace '/another-page' with your route
+    navigate("/admin/list/candidates");
   };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const userToken = localStorage.getItem("userToken");
+        const response = await axios.get(
+          `https://lobster-app-b66lv.ondigitalocean.app/subject/${userId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${userToken}`,
+            },
+            withCredentials: true,
+          }
+        );
+        console.log(response.data.data.subject);
+        setUserData(response.data.data.subject);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
 
+    if (userId) {
+      fetchData();
+    }
+  }, [userId]);
+
+  function capitalizeFirstLetter(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
   return (
     <>
       <div
@@ -52,7 +81,7 @@ function Job() {
                       className="bold"
                       style={{ fontSize: "40px", fontWeight: 600 }}
                     >
-                      Node.js Developer
+                      {userData?.title}
                     </h1>
                     <p
                       className="text-muted my-4"
@@ -60,7 +89,6 @@ function Job() {
                     >
                       (100+ Applications)
                     </p>
-
                     <hr className="m-5"></hr>
                     <h3
                       className="mt-4 pt-5 pb-5"
@@ -75,11 +103,7 @@ function Job() {
                         color: "#646464",
                       }}
                     >
-                      As a Node.js Developer, I am passionate about creating
-                      efficient, scalable, and robust server-side applications.
-                      I specialize in building RESTful APIs, microservices, and
-                      real-time solutions using Node.js, ensuring seamless
-                      integration with front-end applications and databases.
+                      {userData?.description}
                     </p>
                     <hr className="m-5"></hr>
 
@@ -96,40 +120,24 @@ function Job() {
                           transform: "translateX(-10px)",
                         }}
                       >
-                        <li>
-                          {" "}
-                          <ExpandableDiv
-                            name="Core development"
-                            content="content"
-                            borderRadius="8px"
-                            padding="16px"
-                            paddingLeft="10px"
-                            position="relative"
-                            backgroundColor="#9CAFB7"
-                            cursor="pointer"
-                            width="700px"
-                            minWidth="700px"
-                            fontSize="22px"
-                            fontSize1="16px"
-                          />
-                        </li>
-                        <li>
-                          {" "}
-                          <ExpandableDiv
-                            name="Database Management"
-                            content="content"
-                            borderRadius="8px"
-                            padding="16px"
-                            paddingLeft="10px"
-                            position="relative"
-                            backgroundColor="#9CAFB7"
-                            cursor="pointer"
-                            width="700px"
-                            minWidth="700px"
-                            fontSize="22px"
-                            fontSize1="16px"
-                          />
-                        </li>
+                        {userData?.recommendedSkills.map((item, index) => (
+                            <li key={index}>
+                              <ExpandableDiv
+                                name={capitalizeFirstLetter(item?.skill)}
+                                content={capitalizeFirstLetter(item?.description)}
+                                borderRadius="8px"
+                                padding="16px"
+                                paddingLeft="10px"
+                                position="relative"
+                                backgroundColor="#9CAFB7"
+                                cursor="pointer"
+                                width="700px"
+                                minWidth="700px"
+                                fontSize="22px"
+                                fontSize1="16px"
+                              />
+                            </li>
+                          ))}
                       </ul>
                     </div>
 
@@ -141,7 +149,7 @@ function Job() {
                         borderRadius: "12px",
                         display: "flex",
                         justifyContent: "center",
-                        alignItems: "center"
+                        alignItems: "center",
                       }}
                     >
                       Edit Job Details
@@ -158,7 +166,11 @@ function Job() {
                     <div className="mt-4 mt-5 pt-5 ml-5 pl-5">
                       <h4
                         className="m-3"
-                        style={{ fontSize: "23px", fontWeight: 600, transform: "translateX(-5px)" }}
+                        style={{
+                          fontSize: "23px",
+                          fontWeight: 600,
+                          transform: "translateX(-5px)",
+                        }}
                       >
                         Experts
                       </h4>
@@ -173,28 +185,32 @@ function Job() {
                         {renderCircles(15)}
                       </div>
                     </div>
+                  </div>
 
-                    <div
-                      className="mt-10 mt-5 pt-5 ml-5 pl-5"
-                      onClick={handleClick}
+                  <div
+                    className="mt-10 mt-5 pt-5 ml-5 pl-5"
+                    onClick={handleClick1}
+                  >
+                    <h4
+                      className="m-3"
+                      style={{
+                        fontSize: "23px",
+                        fontWeight: 600,
+                        transform: "translateX(-5px)",
+                      }}
                     >
-                      <h4
-                        className="m-3"
-                        style={{ fontSize: "23px", fontWeight: 600, transform: "translateX(-5px)" }}
-                      >
-                        Candidates
-                      </h4>
-                      <div
-                        style={{
-                          display: "flex",
-                          flexWrap: "wrap",
-                          gap: "3px",
-                          maxWidth: "90%",
-                        }}
-                      >
-                        {renderCircles(27)}{" "}
-                        <p className="text-muted mt-2">+99 more</p>
-                      </div>
+                      Candidates
+                    </h4>
+                    <div
+                      style={{
+                        display: "flex",
+                        flexWrap: "wrap",
+                        gap: "3px",
+                        maxWidth: "20%",
+                      }}
+                    >
+                      {renderCircles(27)}{" "}
+                      <p className="text-muted mt-2">+99 more</p>
                     </div>
                   </div>
                 </div>

@@ -26,9 +26,9 @@ const Candidatelist = ({ head, page }) => {
   const [selectedIIT, setSelectedIIT] = useState("all");
   const [expertIds, setExpertIds] = useState([]);
   const [selectedNames, setSelectedNames] = useState([]);
+  const [panelData, setPanelData] = useState([]);
 
   const searchInputRef = useRef(null);
-
   // Keyboard Shortcut for Search Focus
   useEffect(() => {
     const handleKeyPress = (event) => {
@@ -193,21 +193,16 @@ const Candidatelist = ({ head, page }) => {
         />
       ));
     } else if (page === "Panel") {
-      return sortFilteredData.map((person) => (
+      return (panelData.length > 0 ? panelData : sortFilteredData).map((person) => (
         <Panel
-          key={person?.id}
-          id={person._id}
+          key={person?.expertId || person?.id}
+          id={person.expertId || person._id}
           text="expert"
-          imageSrc={node}
           name={person?.name}
-          profileScore={Math.round(person?.averageProfileScore)}
-          reviews={person?.averageFeedbackScore}
-          pronoun={capitalizeFirstLetter(person?.gender)}
+          profileScore={Math.round(person?.profileScore || person?.averageProfileScore)}
+          reviews={person?.reviews || person?.averageFeedbackScore}
           experience="Beginner"
-          unit={person?.unit || "1st Reconnaissance Squadron"}
-          age={calculateAge(person.dateOfBirth)}
           onCheckBoxChange={handleCheckboxChange}
-          interview={person?.currentDepartment}
         />
       ));
     }
@@ -243,8 +238,9 @@ const Candidatelist = ({ head, page }) => {
         searchInputRef={searchInputRef}
         handleFocus={handleFocus}
         page={page}
-        selectedIIT={selectedIIT} // Pass selectedIIT
+        selectedIIT={selectedIIT}
         onIITChange={(e) => setSelectedIIT(e.target.value)}
+        onDataFetched={setPanelData}
       />
       <div className="my-[40px] w-[60%] h-[0.8px] bg-gray-400"></div>
       <div className="scrollable-container">
