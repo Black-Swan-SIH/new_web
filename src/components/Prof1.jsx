@@ -82,7 +82,7 @@ const Prof1 = ({
               fontWeight="500"
               color="var(--text-color23)"
             >
-              Department
+              Department:
             </Heading>
             <Heading
               fontSize={FontSize2}
@@ -118,7 +118,7 @@ const Prof1 = ({
     fontWeight="500"
     color="var(--text-color23)"
   >
-    Expertise
+    Expertise:
   </Heading>
   <div style={{width: "40vw", fontSize: "12px", fontWeight: "500", overflow: "hidden" }}>
     {expertise && expertise.length > 0 ? (
