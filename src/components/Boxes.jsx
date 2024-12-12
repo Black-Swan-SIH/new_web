@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import "../styles/Boxes.css";
 import Button from "./Button.jsx";
-import Input from "./Input.jsx";
-import axios from "axios";
-import Data from "../Data.jsx";
 
 const Boxes = ({
   children,
@@ -18,57 +15,47 @@ const Boxes = ({
   page,
   selectedIIT,
   onIITChange,
-  onDataFetched,
 }) => {
-  const [selectedValue, setSelectedValue] = useState(selectedIIT);
-  const [domainInput, setDomainInput] = useState("");
-  const[expertiseInput,setExpertiseInput]=useState("");
-  const[expertiseArray,setExpertiseArray]=useState([]);
+  // Arrays for suggestions
+  const departments = [
+    "Computer Science",
+    "Mechanical",
+    "Electrical",
+    "Civil",
+    "Aerospace",
+  ];
+  const expertise = [
+    "AI",
+    "Machine Learning",
+    "Cybersecurity",
+    "Game Development",
+    "Web Development",
+  ];
 
-  const handleIITChange = (event) => {
-    const value = event.target.value;
-    setSelectedValue(value);
-    onIITChange(event); // Call the parent handler to update the parent state
+  // States for managing suggestions and input values
+  const [departmentInput, setDepartmentInput] = useState("");
+  const [expertiseInput, setExpertiseInput] = useState("");
+  const [filteredDepartments, setFilteredDepartments] = useState([]);
+  const [filteredExpertise, setFilteredExpertise] = useState([]);
+
+  // Handlers for department input
+  const handleDepartmentChange = (e) => {
+    const value = e.target.value;
+    setDepartmentInput(value);
+    setFilteredDepartments(
+      departments.filter((dept) =>
+        dept.toLowerCase().includes(value.toLowerCase())
+      )
+    );
   };
 
-  const handleDomainChange = (event) => {
-    const value = event.target.value;
-    setDomainInput(value);
-  };
-
-  const handleExpertiseChange = (event) => {
-    const value = event.target.value;
+  // Handlers for expertise input
+  const handleExpertiseChange = (e) => {
+    const value = e.target.value;
     setExpertiseInput(value);
-    const expertise = value.split(',').map(exp => exp.trim());
-    setExpertiseArray(expertise);
-  };
-
-  // const handleSubmit = async () => {
-  //   try {
-  //     const userToken = localStorage.getItem("userToken");
-  //     const response = await axios.post(
-  //       'https://lobster-app-b66lv.ondigitalocean.app/extraexperts/giveme',
-  //       {
-  //         college: selectedValue,
-  //         domain: domainInput,
-  //         expertise: expertiseArray,
-  //       },
-  //       {
-  //         headers: {
-  //           Authorization: `Bearer ${userToken}`,
-  //         },
-  //         withCredentials: true,
-  //       }
-  //     );
-  //     console.log('Data submitted successfully:', response.data.data);
-  //     onDataFetched(response.data.data);
-  //   } catch (error) {
-  //     console.error('Error submitting data:', error);
-  //   }
-  // };
-
-  const handleSubmit = () => {
-    onDataFetched(Data);
+    setFilteredExpertise(
+      expertise.filter((exp) => exp.toLowerCase().includes(value.toLowerCase()))
+    );
   };
 
   return (
@@ -97,6 +84,7 @@ const Boxes = ({
           </Button>
         </div>
       </div>
+
       <div className="sorting">
         <select
           value={sortOption}
@@ -107,32 +95,18 @@ const Boxes = ({
           <option value="time-asc">Newest</option>
           <option value="time-desc">Oldest</option>
         </select>
+
         {page === "Panel" ? (
-          <div className="flex">
-            <select
-              value={selectedIIT}
-              onChange={handleIITChange}
-              className="sort-dropdown"
-            >
-              <option value="All">All</option>
-              <option value="IIT Bombay">IIT BOMBAY</option>
-              <option value="IIT Kanpur">IIT KANPUR</option>
-              <option value="IIT Delhi">IIT DELHI</option>
-              <option value="TIET">TIET</option>
-            </select>
-            <Input
-              type="text"
-              placeholder="Domain"
-              value={domainInput}
-              onChange={handleDomainChange}
-            />
-            <Input
-              type="text"
-              placeholder="Expertise"
-              value={expertiseInput}
-              onChange={handleExpertiseChange}
-            />
-          </div>
+          <select
+            value={selectedIIT}
+            onChange={onIITChange}
+            className="sort-dropdown"
+          >
+            <option value="all">All</option>
+            <option value="IIT BOMBAY">IIT BOMBAY</option>
+            <option value="IIT KANPUR">IIT KANPUR</option>
+            <option value="IIT DELHI">IIT DELHI</option>
+          </select>
         ) : (
           <select
             value={ageRange}
@@ -145,10 +119,49 @@ const Boxes = ({
             <option value="31-40">31-40</option>
           </select>
         )}
+        
       </div>
-      <Button onClick={handleSubmit} bgcolor="blue" color="white" fontWeight="500" fontSize="14px" padding="10px 20px">
-        Submit
-      </Button>
+
+      {/* Department Input with Suggestions */}
+
+
+      {/* Expertise Input with Suggestions */}
+      <div className="search-box">
+        <span className="search-prefix">
+          <i className="fas fa-search" style={{ fontSize: "16px" }}></i>
+        </span>
+        <div className="searchkk">
+          <input
+            type="text"
+            placeholder="Expertise"
+            value={expertiseInput}
+            onChange={handleExpertiseChange}
+          />
+          {expertiseInput && (
+            <ul className="suggestions">
+              {filteredExpertise.map((exp, index) => (
+                <li key={index} onClick={() => setExpertiseInput(exp)}>
+                  {exp}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      </div>
+      <div style={{
+        width: "150px"
+      }}>
+        <Button
+          bgcolor="rgba(190, 190, 190, 1)"
+          color="black"
+          fontWeight="500"
+          fontSize="14px"
+          padding="3px 12px"
+        >
+          Submit
+        </Button>
+      </div>
+
       {children}
     </div>
   );
