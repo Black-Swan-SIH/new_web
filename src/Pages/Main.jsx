@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../styles/Main.css";
 import play from "../assets/play.png";
 import Lottie from "lottie-react";
@@ -17,6 +17,16 @@ const Modal = ({ onClose, isLogin, setIsLogin }) => {
   const [loading,setLoading]=useState(false);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const userToken = localStorage.getItem("userToken");
+    console.log(userToken);
+    if (userToken) {
+      navigate("/admin/dashboard");
+    } else {
+      setIsLogin(false);
+    }
+  }, []);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -28,8 +38,8 @@ const Modal = ({ onClose, isLogin, setIsLogin }) => {
     setLoading(true);
     try {
       const url = isLogin
-        ? "https://sih-backend-xengu.ondigitalocean.app/admin/signin"
-        : "https://sih-backend-xengu.ondigitalocean.app/admin/signup";
+        ? "https://lobster-app-b66lv.ondigitalocean.app/admin/signin"
+        : "https://lobster-app-b66lv.ondigitalocean.app/admin/signin";
 
       const response = await axios.post(
         url,

@@ -2,6 +2,8 @@ import React from "react";
 import "../styles/Prof.css";
 import Heading from "./Heading.jsx";
 import Button from "./Button.jsx";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 const Prof = ({
   imageSrc,
   name,
@@ -19,20 +21,41 @@ const Prof = ({
   FontSize2,
   marginTop,
   marginBottom,
-  display
+  display,
+  userId,
+  subject,
 }) => {
+  const navigate = useNavigate();
+
+  const handleEditProfile = async () => {
+    try {
+      const userToken = localStorage.getItem("userToken");
+      const response = await axios.get(
+        `https://lobster-app-b66lv.ondigitalocean.app/subject/${subject}/sorteddata`,{
+          headers: {
+            Authorization: `Bearer ${userToken}`,
+          },
+          withCredentials: true,
+        }
+      );
+      const data = response.data;
+      console.log(data); // Handle the fetched data as needed
+      navigate(`/candidate/${userId}/panel`,{state:{userId}});
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      alert("An error occurred while fetching data. Please try again.");
+    }
+  };
   return (
-    <div className="flex" style={{ gap: gap}}>
+    <div className="flex" style={{ gap: gap }}>
       <div
         className="image-pcontainer"
         style={{ height: height, width: width, borderRadius: borderRadius }}
       >
         <img src={imageSrc} alt="profile" className="pimage" />
       </div>
-      <div style={{marginTop:marginTop}}>
-
-
-    {display ? (
+      <div style={{ marginTop: marginTop }}>
+        {display ? (
           <Button
             marginRight="-10px"
             border="1px solid black"
@@ -46,19 +69,13 @@ const Prof = ({
             children="Verified"
           />
         ) : (
-          <Button
-       
-            backgroundColor="white"
-           
-          />
+          <Button backgroundColor="white" />
         )}
 
-
-        
-        <Heading fontSize={nameFontSize} fontWeight="600" color={nameColor} >
+        <Heading fontSize={nameFontSize} fontWeight="600" color={nameColor}>
           {name}
         </Heading>
-        <div className="flex gap-8" style={{marginBottom:marginBottom}}>
+        <div className="flex gap-8" style={{ marginBottom: marginBottom }}>
           <div className="flex  gap-3">
             <Heading
               fontSize={FontSize1}
@@ -127,24 +144,21 @@ const Prof = ({
           </div>
         </div>
         {display ? (
-                <Button
-                 color="white"
-                 bgcolor="black"
-                 marginBottom="15px"
-                 width="120px"
-                 height="30px"
-                 borderRadius="10px"
-                  children="Edit Profile"
-                 marginTop="15px"
-                 fontSize="13px"
-                />
-              ) : (
-                <Button
-             
-                  backgroundColor="white"
-                 
-                />
-              )}
+          <Button
+            onClick={handleEditProfile}
+            color="white"
+            bgcolor="black"
+            marginBottom="15px"
+            width="120px"
+            height="30px"
+            borderRadius="10px"
+            children="Select Panel"
+            marginTop="15px"
+            fontSize="13px"
+          />
+        ) : (
+          <Button backgroundColor="white" />
+        )}
       </div>
     </div>
   );

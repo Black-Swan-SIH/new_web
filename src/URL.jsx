@@ -1,2 +1,2 @@
-const URL = "https://sih-backend-xengu.ondigitalocean.app/";
+const URL = "https://lobster-app-b66lv.ondigitalocean.app/";
 export default URL;

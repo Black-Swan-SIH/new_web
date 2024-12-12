@@ -116,7 +116,7 @@ const StepperForm = () => {
       console.log(payload);
       const userToken = localStorage.getItem("userToken");
       const response = await axios.post(
-        "https://sih-backend-xengu.ondigitalocean.app/expert",
+        "https://lobster-app-b66lv.ondigitalocean.app/expert",
         payload,
         {
           headers: {

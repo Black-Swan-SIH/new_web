@@ -48,14 +48,14 @@ const handleLogout = () => {
 
       <Routes>
         <Route path="/expert/signin" element={<Sign but="Register" a="Login" text="Already have an account?" apiUrl={`${URL}expert/signin`}>Sign In</Sign>} />
-        <Route path="/candidate/signin" element={<Sign but="Register" a="Login" text="Already have an account?" apiUrl="https://sih-backend-xengu.ondigitalocean.app/candidate/signin">Sign In</Sign>} />
-        <Route path="/admin/signin" element={<Sign but="Register" a="Login" text="Already have an account?" apiUrl="https://sih-backend-xengu.ondigitalocean.app/admin/signin">Sign In</Sign>} />
+        <Route path="/candidate/signin" element={<Sign but="Register" a="Login" text="Already have an account?" apiUrl="https://lobster-app-b66lv.ondigitalocean.app/candidate/signin">Sign In</Sign>} />
+        <Route path="/admin/signin" element={<Sign but="Register" a="Login" text="Already have an account?" apiUrl="https://lobster-app-b66lv.ondigitalocean.app/admin/signin">Sign In</Sign>} />
         <Route path="/profile" element={<Profile value={80} color="green" userId={1}/>} />
         <Route path="/:text/:userId" element={<Profile />} />
         <Route path="/admin/job" element={<Job />} /> 
         <Route path="/admin/list/candidates" element={<Candidatelist head="Candidates" page="Candidatelist"/>}/>
         <Route path="/admin/list/experts" element={<Candidatelist head="Experts" page="Expertlist"/>}/>
-        <Route path="/admin/panel" element={<Candidatelist head="Select your panel" page="Panel"/>}/>
+        <Route path="/candidate/:userId/panel" element={<Candidatelist head="Select your panel" page="Panel"/>}/>
         <Route path="/admin/dashboard" element={<Dashboard/>}/>
         <Route path="/admin/" element={<Main/>}/>
         

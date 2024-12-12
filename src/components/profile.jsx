@@ -9,7 +9,7 @@ import { RecoilRoot } from "recoil";
 import TopSkills from "./topSkills.jsx";
 import Cards from "./Card.jsx";
 import Prof from "./Prof.jsx";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import axios from "axios";
 
 function Profile({ value, color, userId, text }) {
@@ -23,20 +23,24 @@ function Profile({ value, color, userId, text }) {
 function ProfilePage({ value, color }) {
   const { userId, text } = useParams();
   const [userData, setUserData] = useState(null);
+  const location = useLocation();
+  const expertIds = location.state?.expertIds || [];
+  const [expertsData, setExpertsData] = useState([]);
 
   useEffect(() => {
     const fetchUserData = async () => {
       try {
         const userToken = localStorage.getItem("userToken");
         const response = await axios.get(
-          `https://sih-backend-xengu.ondigitalocean.app/${text}/${userId}`,{
+          `https://lobster-app-b66lv.ondigitalocean.app/${text}/${userId}`,
+          {
             headers: {
               Authorization: `Bearer ${userToken}`,
             },
             withCredentials: true,
           }
         );
-        console.log(response.data.data[text]);
+        console.log(response.data.data);
         setUserData(response.data.data[text]);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -44,6 +48,35 @@ function ProfilePage({ value, color }) {
     };
     fetchUserData();
   }, [userId, text]);
+
+  useEffect(() => {
+    const fetchExpertsData = async () => {
+      try {
+        const userToken = localStorage.getItem("userToken");
+        console.log(expertIds);
+        const data = [];
+        for (const id of expertIds) {
+          const response = await axios.get(
+            `https://lobster-app-b66lv.ondigitalocean.app/expert/${id}`,
+            {
+              headers: {
+                Authorization: `Bearer ${userToken}`,
+              },
+              withCredentials: true,
+            }
+          );
+          console.log(response.data.data);
+          data.push(response.data.data.expert);
+        }
+        setExpertsData(data);
+      } catch (error) {
+        console.error("Error fetching experts data:", error);
+      }
+    };
+    if (expertIds.length > 0) {
+      fetchExpertsData();
+    }
+  }, [expertIds]);
 
   const calculateAge = (dob) => {
     const birthDate = new Date(dob);
@@ -59,10 +92,10 @@ function ProfilePage({ value, color }) {
     return age;
   };
 
-  const millisecondsToYear=(milliseconds)=>{
-    const years = milliseconds / (1000*60*60*24*365.25);
+  const millisecondsToYear = (milliseconds) => {
+    const years = milliseconds / (1000 * 60 * 60 * 24 * 365.25);
     return years.toFixed(1);
-  }
+  };
 
   if (!userData) {
     return <div>Loading...</div>;
@@ -101,6 +134,8 @@ function ProfilePage({ value, color }) {
               marginTop="15px"
               marginBottom="6px"
               display="1"
+              userId={userId}
+              subject={userData.subject}
             />
           </div>
         </div>
@@ -128,40 +163,51 @@ function ProfilePage({ value, color }) {
                   </span>
                 </p>
                 <ul className="mr-5 pr-5">
-                {userData.skills.map((skill, index) => (
-              <li key={index} style={{ marginBottom: "10px", marginTop: index === 0 ? "15px" : "10px" }}>
-                <TopSkills value={millisecondsToYear(skill.duration)} skill={skill.skill} />
-              </li>
-            ))}
+                  {userData.skills.map((skill, index) => (
+                    <li
+                      key={index}
+                      style={{
+                        marginBottom: "10px",
+                        marginTop: index === 0 ? "15px" : "10px",
+                      }}
+                    >
+                      <TopSkills
+                        value={millisecondsToYear(skill.duration)}
+                        skill={skill.skill}
+                      />
+                    </li>
+                  ))}
                 </ul>
               </div>
-              {(text==="expert" &&<div className="px-5 mx-5 mt-3">
-                <h1
-                  style={{
-                    fontSize: "27px",
-                    fontWeight: "600",
-                    marginBottom: "10px",
-                    marginTop: "10px",
-                  }}
-                >
-                  Reviews
-                </h1>
-                <p className="text-muted text-[14px]">
-                  4.8 / 5 &nbsp;
-                  <span style={{ color: "black" }}>
-                    <i class="fa-solid fa-star"></i>
-                  </span>
-                </p>
+              {text === "expert" && (
+                <div className="px-5 mx-5 mt-3">
+                  <h1
+                    style={{
+                      fontSize: "27px",
+                      fontWeight: "600",
+                      marginBottom: "10px",
+                      marginTop: "10px",
+                    }}
+                  >
+                    Reviews
+                  </h1>
+                  <p className="text-muted text-[14px]">
+                    4.8 / 5 &nbsp;
+                    <span style={{ color: "black" }}>
+                      <i class="fa-solid fa-star"></i>
+                    </span>
+                  </p>
 
-                <ul className="pt-3">
-                  <li>
-                    <p>Jordan k.</p>
-                    <p className="text-muted" style={{ maxWidth: "300px" }}>
-                      Lorem ipsum dolor, sit amet consectetur...{" "}
-                    </p>
-                  </li>
-                </ul>
-              </div>)}
+                  <ul className="pt-3">
+                    <li>
+                      <p>Jordan k.</p>
+                      <p className="text-muted" style={{ maxWidth: "300px" }}>
+                        Lorem ipsum dolor, sit amet consectetur...{" "}
+                      </p>
+                    </li>
+                  </ul>
+                </div>
+              )}
             </div>
 
             <div className="col-md-4">
@@ -194,6 +240,19 @@ function ProfilePage({ value, color }) {
                 <a href="/" className="text-primary" style={{ color: "black" }}>
                   View All
                 </a>
+                <div>
+                  <select
+                    className="form-select"
+                    aria-label="Default select example"
+                  >
+                    <option value="">Select an option</option>
+                    {expertsData.map((expert) => (
+                      <option key={expert.id} value={expert.id}>
+                        {expert.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
               </div>
             </div>
 
@@ -215,7 +274,7 @@ function ProfilePage({ value, color }) {
                     marginRight: "15px",
                   }}
                 >
-                  Profile Score
+                  {text === "candidate" ? "Relevancy Score" : "Profile Score"}
                 </h4>
                 <div
                   style={{
@@ -225,7 +284,11 @@ function ProfilePage({ value, color }) {
                   }}
                 >
                   <CircularProgressbarWithChildren
-                    value={Math.round(userData.averageRelevancyScore)}
+                    value={Math.round(
+                      text === "candidate"
+                        ? userData.relevancyScore
+                        : userData.profileScore
+                    )}
                     styles={{
                       path: {
                         stroke: "#DE8F6E",
@@ -246,8 +309,14 @@ function ProfilePage({ value, color }) {
                         fontWeight: "500",
                       }}
                     >
-                      <p>{Math.round(userData.averageRelevancyScore)
-                      } / 100</p>
+                      <p>
+                        {Math.round(
+                          text === "candidate"
+                            ? userData.relevancyScore
+                            : userData.profileScore
+                        )}{" "}
+                        / 100
+                      </p>
                     </div>
                   </CircularProgressbarWithChildren>
                 </div>

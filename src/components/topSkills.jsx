@@ -4,18 +4,16 @@ import { height } from '@mui/system';
 
 
 function TopSkills({value,skill}) {
+  const capitalizeFirstLetter = (str) => {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  };
     return ( <>
-
-{/* <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop:"10px"}}><p style={{ marginRight: "20px"}} >{skill}</p> &nbsp;
-<span className=''>  <LinearProgress determinate value={value} style={{width:"250px"}}
-        /></span>
-</div> */}
      <div
         style={{
           display: "flex",
           alignItems: "center",
           marginTop: "10px",
-          width: "100%", // Ensures consistent alignment across all rows
+          width: "100%",
         }}
       >
         {/* Skill name with a fixed width to align properly */}
@@ -27,7 +25,7 @@ function TopSkills({value,skill}) {
             fontWeight:"500"// Aligns the text on the left
           }}
         >
-          {skill}
+          {capitalizeFirstLetter(skill)}
         </p>
         <span style={{ flexGrow: 1 }}>
           <LinearProgress
