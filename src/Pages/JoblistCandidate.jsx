@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import Input from '../components/Input';
 import axios from "axios";
 import Button from '../components/Button';
-import '../styles/dropdown.css';
+import '../styles/dropDown.css';
 import '../styles/joblist.css';
 
 function JoblistCandidate({ setShowNavbar, height, jobIds }) {
