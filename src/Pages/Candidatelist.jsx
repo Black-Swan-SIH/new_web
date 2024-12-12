@@ -9,6 +9,7 @@ import Boxes from "../components/Boxes.jsx";
 import { handleFocus } from "../components/Functions.jsx";
 import Panel from "../components/Panel.jsx";
 import axios from "axios";
+import URL from "../URL.jsx";
 
 const Candidatelist = ({ head, page }) => {
   const currentYear = new Date().getFullYear();
@@ -55,7 +56,7 @@ const Candidatelist = ({ head, page }) => {
       try {
         const userToken = localStorage.getItem("userToken");
         const response = await axios.get(
-          `https://sih-backend-xengu.ondigitalocean.app/${endpoint}`,
+          `${URL}${endpoint}`,
           {
             headers: {
               Authorization: `Bearer ${userToken}`,

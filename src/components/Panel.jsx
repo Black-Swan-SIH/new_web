@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import "../styles/Panel.css";
 import Prof from "./Prof.jsx";
 import Review from "./Review.jsx";
 import { useNavigate } from "react-router-dom";
