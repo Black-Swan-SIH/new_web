@@ -11,6 +11,7 @@ import Panel from "../components/Panel.jsx";
 import axios from "axios";
 import URL from "../URL.jsx";
 import { useLocation, useNavigate } from "react-router-dom";
+import Button from "../components/Button.jsx";
 
 const Candidatelist = ({ head, page }) => {
   const navigate=useNavigate();
@@ -203,11 +204,14 @@ const Candidatelist = ({ head, page }) => {
           text="expert"
           imageSrc={node}
           name={person?.name}
+          profileScore={Math.round(person?.averageProfileScore)}
+          reviews={person?.averageFeedbackScore}
           pronoun={capitalizeFirstLetter(person?.gender)}
           experience="Beginner"
           unit={person?.unit || "1st Reconnaissance Squadron"}
           age={calculateAge(person.dateOfBirth)}
           onCheckBoxChange={handleCheckboxChange}
+          interview={person?.currentDepartment}
         />
       ));
     }
@@ -259,9 +263,17 @@ const Candidatelist = ({ head, page }) => {
         </div>
       </div>
       {page === "Panel" && (
-        <button onClick={handleSubmit} className="submit-button">
-          Submit
-        </button>
+        <Button
+        onClick={handleSubmit}
+        bgcolor="var(--bg-color2)"
+        color="var(--text-color22)"
+        fontWeight="500"
+        fontSize="14px"
+        borderRadius="8px"
+        padding="7px 12px"
+      >
+        Submit
+      </Button>
       )}
     </div>
   );
