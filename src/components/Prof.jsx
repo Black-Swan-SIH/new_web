@@ -152,7 +152,7 @@ const Prof = ({
             width="120px"
             height="30px"
             borderRadius="10px"
-            children="Edit Profile"
+            children="Select Panel"
             marginTop="15px"
             fontSize="13px"
           />
