@@ -219,7 +219,7 @@ const Candidatelist = ({ head, page }) => {
   ).length;
 
   return (
-    <div className="cont" style={{backgroundColor:"#E5E5E5"}}>
+    <div className="cont" style={{backgroundColor:"white"}}>
       <div className="head">
         <Heading fontSize="40px" fontWeight="600" color="var(--text-color9)">
           {head}

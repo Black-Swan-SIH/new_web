@@ -119,7 +119,31 @@ const Boxes = ({
             <option value="31-40">31-40</option>
           </select>
         )}
-        
+        <div className="search-box">
+        <span className="search-prefix">
+          <i className="fas fa-search" style={{ fontSize: "16px" }}></i>
+        </span>
+        <div className="searchkk">
+          <input
+            type="text"
+            placeholder="Department"
+            value={expertiseInput}
+            onChange={handleExpertiseChange}
+          />
+          {expertiseInput && (
+            <ul className="suggestions">
+              {filteredExpertise.map((exp, index) => (
+                <li key={index} onClick={() => setExpertiseInput(exp)}>
+                  {exp}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      </div>
+      <div style={{
+        width: "150px"
+      }}></div>
       </div>
 
       {/* Department Input with Suggestions */}
