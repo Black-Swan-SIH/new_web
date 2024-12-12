@@ -8,7 +8,7 @@ function ProgressBar({ value, color }) {
   return (
     <>
       <CircularProgressbarWithChildren
-        value={value}
+        value={value*10}
         styles={{
           path: {
             stroke: color,

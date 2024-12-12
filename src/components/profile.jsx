@@ -273,7 +273,7 @@ function ProfilePage({ value, color }) {
                     <li>
                       <p>Jordan k.</p>
                       <p className="text-muted" style={{ maxWidth: "300px" }}>
-                        Lorem ipsum dolor, sit amet consectetur...{" "}
+                        specialist in node.js...{" "}
                       </p>
                     </li>
                   </ul>
@@ -426,11 +426,11 @@ function ProfilePage({ value, color }) {
                   }}
                 >
                   <CircularProgressbarWithChildren
-                    value={Math.round(
+                    value={Math.floor(
                       text === "candidate"
                         ? userData.relevancyScore
-                        : userData.profileScore
-                    )}
+                        : userData.averageRelevancyScore
+                    )*10}
                     styles={{
                       path: {
                         stroke: "#DE8F6E",
@@ -457,7 +457,7 @@ function ProfilePage({ value, color }) {
                             ? userData.relevancyScore
                             : userData.averageProfileScore
                         )}{" "}
-                        / 100
+                        / 10
                       </p>
                     </div>
                   </CircularProgressbarWithChildren>

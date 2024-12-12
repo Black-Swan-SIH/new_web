@@ -176,7 +176,7 @@ const Candidatelist = ({ head, page }) => {
           name={person?.name}
           age={calculateAge(person.dateOfBirth)}
           work={person?.currentPosition}
-          value={Math.round(person?.averageRelevancyScore)}
+          value={Math.round(person?.RelevancyScore)}
         />
       ));
     } else if (page === "Expertlist") {
