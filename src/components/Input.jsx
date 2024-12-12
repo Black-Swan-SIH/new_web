@@ -4,6 +4,7 @@ import "../styles/Input.css";
 const Input = ({
   type = "text", // Default type
   children,
+  placeholder,
   name,
   value,
   onChange,
@@ -12,8 +13,6 @@ const Input = ({
   borderRadius = "4px", // Default border-radius
   boxShadow = "0px 2px 4px rgba(0, 0, 0, 0.1)", // Default box-shadow
   placeholderColor,
-  placeholder
-  
 }) => {
   const placeholderClass = placeholderColor ? `placeholder-${placeholderColor}` : "";
 
@@ -23,17 +22,19 @@ const Input = ({
         {children}
       </label>
       <input
+        placeholder={placeholder}
         id={name}
         type={type}
         name={name}
         value={value}
         onChange={onChange}
-        placeholder={placeholder}
         style={{
           color: color,
           background: background,
           borderRadius: borderRadius,
           boxShadow: boxShadow,
+          border:"1px grey solid"
+         
         }}
         className={`input ${placeholderClass}`}
         required
