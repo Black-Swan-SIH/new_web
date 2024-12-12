@@ -68,8 +68,8 @@ function Job() {
       >
         <div className="container ml-5 mt-5 pt-5 pl-5">
           <div className="container ml-5 mt-5 pt-5 pl-5">
-            <div className="container ml-5 pl-5 mt-5 pt-5">
-              <div className="container ml-5 pl-5 mt-5 pt-5">
+            <div className="container mt-5 pt-5">
+              <div className="container mt-5 pt-5">
                 <div className="row ml-5 pl-5 mt-5 pt-5">
                   <div
                     className="col-lg-8 col-md-12 mt-5 pt-5"
@@ -155,9 +155,9 @@ function Job() {
                       Edit Job Details
                     </button>
                   </div>
-
-                  <div
-                    className="col-lg-4 col-md-12 mt-5 pt-5"
+                      <div className="col-lg-4 col-md-12">
+                      <div
+                    className=" mt-5 pt-5"
                     style={{
                       marginLeft: "90px",
                     }}
@@ -187,32 +187,62 @@ function Job() {
                     </div>
                   </div>
 
-                  <div
-                    className="mt-10 mt-5 pt-5 ml-5 pl-5"
-                    onClick={handleClick1}
-                  >
-                    <h4
-                      className="m-3"
-                      style={{
-                        fontSize: "23px",
-                        fontWeight: 600,
-                        transform: "translateX(-5px)",
-                      }}
-                    >
-                      Candidates
-                    </h4>
-                    <div
-                      style={{
-                        display: "flex",
-                        flexWrap: "wrap",
-                        gap: "3px",
-                        maxWidth: "20%",
-                      }}
-                    >
-                      {renderCircles(27)}{" "}
-                      <p className="text-muted mt-2">+99 more</p>
-                    </div>
-                  </div>
+
+
+
+
+                  
+                      </div>
+                 
+                      <div
+  style={{
+    marginLeft: "750px",
+    width: "500px", // Reduced the width
+    marginTop: "200px",
+    alignContent: "center",
+    alignItems: "flex-end", // Adjusted alignment
+    position: "absolute",
+ 
+  }}
+>
+  <div
+    className="mt-10 mt-5 pt-5 ml-5 pl-5"
+    onClick={handleClick1}
+    style={{
+      marginLeft: "50px",
+      width: "300px", 
+    
+      height:"500px"// Adjusted to reduce width further
+    }}
+  >
+    <h4
+      className="m-3"
+      style={{
+        fontSize: "23px",
+        fontWeight: 600,
+        transform: "translateX(-5px)",
+      }}
+    >
+      Candidates
+    </h4>
+    <div
+      style={{
+        display: "flex",
+        flexWrap: "wrap",
+        gap: "3px",
+        maxWidth: "90%", // Adjusted for better responsiveness
+      }}
+    >
+      {renderCircles(27)}
+      <p className="text-muted mt-2">+99 more</p>
+    </div>
+  </div>
+</div>
+
+
+
+
+                
                 </div>
               </div>
             </div>
