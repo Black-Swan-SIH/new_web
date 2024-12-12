@@ -394,19 +394,7 @@ function ProfilePage({ value, color }) {
                 <a href="/" className="text-primary" style={{ color: "black" }}>
                   View All
                 </a>
-                <div>
-                  <select
-                    className="form-select"
-                    aria-label="Default select example"
-                  >
-                    <option value="">Select an option</option>
-                    {expertsData.map((expert) => (
-                      <option key={expert.id} value={expert.id}>
-                        {expert.name}
-                      </option>
-                    ))}
-                  </select>
-                </div>
+               
               </div>
             </div>
 
