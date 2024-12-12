@@ -169,6 +169,7 @@ const Dashboard = () => {
             {displayedJobs.map((job, index) => (
               <Cards
                 key={index}
+                userId={job._id}
                 imageSrc={job.imageSrc ? job.imageSrc : node}
                 backgColor="rgba(142, 183, 168, 1)"
                 jobs={job.title}

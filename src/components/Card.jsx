@@ -3,11 +3,12 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 
-function Cards({imageSrc, jobs, applications, open,backgColor,onClick }) {
+function Cards({imageSrc, jobs, applications, open,backgColor,onClick,userId }) {
   const navigate=useNavigate();
 
   const handleClick = () => {
-    navigate("/admin/job");
+    console.log(userId);
+    navigate("/admin/job",{state:{userId}});
   }
 
     return ( <>
