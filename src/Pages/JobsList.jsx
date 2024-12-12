@@ -114,13 +114,14 @@ const JobsList = ({ head }) => {
             Recent job openings
           </Heading>
           <div className="py-1"></div>
-          {filteredAndSortedJobs.slice(0, 2).map((job, index) => (
+          {jobs.slice(0, 2).map((job, index) => (
             <Cards
               key={index}
-              imageSrc={job.imageSrc || node}
+              userId={job._id}
+              imageSrc={job.imageSrc ? job.imageSrc : node}
+              applications={job.applications?.length || 0}
               backgColor="rgba(142, 183, 168, 1)"
               jobs={job.title}
-              applications={job.applications?.length || 0}
               open={<TimeDifference timestamp={job.createdAt} />}
             />
           ))}
@@ -155,7 +156,8 @@ const JobsList = ({ head }) => {
             {filteredAndSortedJobs.map((job, index) => (
               <Cards
                 key={index}
-                imageSrc={job.imageSrc || node}
+                userId={job._id}
+                imageSrc={job.imageSrc ? job.imageSrc : node}
                 backgColor="rgba(142, 183, 168, 1)"
                 jobs={job.title}
                 applications={job.applications?.length || 0}

@@ -174,6 +174,7 @@ const Dashboard = () => {
                 imageSrc={job.imageSrc ? job.imageSrc : node}
                 backgColor="rgba(142, 183, 168, 1)"
                 jobs={job.title}
+                applications={job.applications?.length || 0}
                 open={<TimeDifference timestamp={job.createdAt} />}
               />
             ))}

@@ -11,6 +11,8 @@ import Cards from "./Card.jsx";
 import Prof from "./Prof.jsx";
 import { useLocation, useParams } from "react-router-dom";
 import axios from "axios";
+import node from "../assets/node.jpg";
+import TimeDifference from "../TimeDifference.jsx";
 
 function Profile({ value, color, userId, text }) {
   return (
@@ -21,6 +23,69 @@ function Profile({ value, color, userId, text }) {
 }
 
 function ProfilePage({ value, color }) {
+  const tempData = [
+    {
+      id: 1,
+      title: "Node.js Developer",
+      applications: 5,
+      createdAt: "2023-01-01T00:00:00Z",
+    },
+    {
+      id: 2,
+      title: "React Developer",
+      applications: 3,
+      createdAt: "2023-01-02T00:00:00Z",
+    },
+    {
+      id: 3,
+      title: "Angular Developer",
+      applications: 4,
+      createdAt: "2023-01-03T00:00:00Z",
+    },
+    {
+      id: 4,
+      title: "Vue.js Developer",
+      applications: 2,
+      createdAt: "2023-01-04T00:00:00Z",
+    },
+    {
+      id: 5,
+      title: "Python Developer",
+      applications: 6,
+      createdAt: "2023-01-05T00:00:00Z",
+    },
+    {
+      id: 6,
+      title: "Java Developer",
+      applications: 7,
+      createdAt: "2023-01-06T00:00:00Z",
+    },
+    {
+      id: 7,
+      title: "C# Developer",
+      applications: 1,
+      createdAt: "2023-01-07T00:00:00Z",
+    },
+    {
+      id: 8,
+      title: "PHP Developer",
+      applications: 8,
+      createdAt: "2023-01-08T00:00:00Z",
+    },
+    {
+      id: 9,
+      title: "Ruby Developer",
+      applications: 9,
+      createdAt: "2023-01-09T00:00:00Z",
+    },
+    {
+      id: 10,
+      title: "Go Developer",
+      applications: 10,
+      createdAt: "2023-01-10T00:00:00Z",
+    },
+  ];
+
   const { userId, text } = useParams();
   const [userData, setUserData] = useState(null);
   const location = useLocation();
@@ -226,15 +291,17 @@ function ProfilePage({ value, color }) {
                   Scheduled Interviews
                 </h4>
                 <ul>
-                  <li style={{ marginBottom: "5px" }}>
-                    <Cards title="Node.js Developer" />
-                  </li>
-                  <li style={{ marginBottom: "5px" }}>
-                    <Cards title="Node.js Developer" />
-                  </li>
-                  <li style={{ marginBottom: "5px" }}>
-                    <Cards title="Node.js Developer" />
-                  </li>
+                  {tempData.slice(0, 3).map((job) => (
+                    <li key={job.id} style={{ marginBottom: "5px" }}>
+                      <Cards
+                        imageSrc={node}
+                        applications={job.applications}
+                        backgColor="rgba(142, 183, 168, 1)"
+                        jobs={job.title}
+                        open={<TimeDifference timestamp={job.createdAt} />}
+                      />
+                    </li>
+                  ))}
                 </ul>
 
                 <a href="/" className="text-primary" style={{ color: "black" }}>
