@@ -196,7 +196,7 @@ function Job() {
                  
                       <div
   style={{
-    marginLeft: "750px",
+    marginLeft: "50vw",
     width: "500px", // Reduced the width
     marginTop: "200px",
     alignContent: "center",
