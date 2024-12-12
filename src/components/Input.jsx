@@ -4,6 +4,7 @@ import "../styles/Input.css";
 const Input = ({
   type = "text", // Default type
   children,
+  placeholder,
   name,
   value,
   onChange,
@@ -21,6 +22,7 @@ const Input = ({
         {children}
       </label>
       <input
+        placeholder={placeholder}
         id={name}
         type={type}
         name={name}
@@ -31,6 +33,8 @@ const Input = ({
           background: background,
           borderRadius: borderRadius,
           boxShadow: boxShadow,
+          border:"1px grey solid"
+         
         }}
         className={`input ${placeholderClass}`}
         required

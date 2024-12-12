@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import Input from "./Input.jsx";
+import Input from "./Input";
 import "../styles/Stepperform.css";
-import Heading from "./Heading.jsx";
-import Button from "./Button.jsx";
+import Heading from "./Heading";
+import Button from "./Button";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -116,7 +116,7 @@ const StepperForm = () => {
       console.log(payload);
       const userToken = localStorage.getItem("userToken");
       const response = await axios.post(
-        "https://lobster-app-b66lv.ondigitalocean.app/expert",
+        "https://new-backend-9ryof.ondigitalocean.app/expert",
         payload,
         {
           headers: {
@@ -148,15 +148,15 @@ const StepperForm = () => {
   };
 
   return (
-    <div className="steppercontainer">
-      <div className="flex justify-between">
-        <Heading fontSize="18px" fontWeight="600">
+    <div className="steppercontainer" style={{backgroundColor:""}}>
+      <div className="flex justify-between" style={{marginBottom:"5px"}}>
+        <Heading fontSize="16px" fontWeight="600">
           Personal
         </Heading>
-        <Heading fontSize="18px" fontWeight="600">
+        <Heading fontSize="16px" fontWeight="600">
           Experience
         </Heading>
-        <Heading fontSize="18px" fontWeight="600">
+        <Heading fontSize="16px" fontWeight="600">
           Education
         </Heading>
       </div>
@@ -174,7 +174,7 @@ const StepperForm = () => {
       <div className="steppercontent">
         {step === 1 && (
           <>
-            <Heading fontSize="17px" fontWeight="500">
+            <Heading fontSize="15px" fontWeight="500">
               Name
             </Heading>
             <Input
@@ -185,7 +185,7 @@ const StepperForm = () => {
               className="stepperinput"
             />
 
-            <Heading fontSize="17px" fontWeight="500">
+            <Heading fontSize="15px" fontWeight="500">
               Email
             </Heading>
             <Input
@@ -196,7 +196,7 @@ const StepperForm = () => {
               className="stepperinput"
             />
 
-            <Heading fontSize="17px" fontWeight="500">
+            <Heading fontSize="15px" fontWeight="500">
               Mobile Number
             </Heading>
             <Input
@@ -207,10 +207,10 @@ const StepperForm = () => {
               className="stepperinput"
             />
 
-            <Heading fontSize="17px" fontWeight="500">
+            <Heading fontSize="15px" fontWeight="500">
               Gender
             </Heading>
-            <select
+            <select style={{fontSize:"15px", fontWeight:"500", border:"1px grey solid"}}
               name="gender"
               value={formData.gender}
               onChange={handleChange}
@@ -223,7 +223,7 @@ const StepperForm = () => {
               <option value="other">Other</option>
             </select>
 
-            <Heading fontSize="17px" fontWeight="500">
+            <Heading fontSize="15px" fontWeight="500">
               Date of Birth
             </Heading>
             <Input
@@ -234,7 +234,7 @@ const StepperForm = () => {
               className="stepperinput"
             />
 
-<Heading fontSize="17px" fontWeight="500">Skills</Heading>
+<Heading fontSize="15px" fontWeight="500">Skills</Heading>
             {skills.map((skill, index) => (
               <div key={index} className="skill-section">
                 <Input
@@ -255,7 +255,7 @@ const StepperForm = () => {
               Add Another Skill
             </button>
 
-<Heading fontSize="17px" fontWeight="500">
+<Heading fontSize="15px" fontWeight="500">
               Current Position
             </Heading>
             <Input
@@ -266,7 +266,7 @@ const StepperForm = () => {
               className="stepperinput"
             />
 
-<Heading fontSize="17px" fontWeight="500">
+<Heading fontSize="15px" fontWeight="500">
               Current Department
             </Heading>
             <Input
@@ -283,9 +283,12 @@ const StepperForm = () => {
           <div>
             {experience.map((work, index) => (
               <div key={index} className="work-experience-section">
-                <Heading fontSize="17px" fontWeight="500">
+                <div style={{marginBottom:"10px"}}>
+                <Heading fontSize="15px" fontWeight="500" >
                   Position
                 </Heading>
+                </div>
+              
                 <Input
                   type="text"
                   value={work.position}
@@ -294,10 +297,12 @@ const StepperForm = () => {
                   }
                   className="stepperinput"
                 />
-
-                <Heading fontSize="17px" fontWeight="500">
+                  <div style={{marginBottom:"10px"}}>
+                  <Heading fontSize="15px" fontWeight="500">
                   Department
                 </Heading>
+                  </div>
+              
                 <Input
                   type="text"
                   value={work.department}
@@ -306,10 +311,12 @@ const StepperForm = () => {
                   }
                   className="stepperinput"
                 />
-
-                <Heading fontSize="17px" fontWeight="500">
+                  <div style={{marginBottom:"10px"}}>
+                  <Heading fontSize="15px" fontWeight="500">
                   Start Date
                 </Heading>
+                  </div>
+              
                 <Input
                   type="date"
                   value={work.startDate}
@@ -318,10 +325,15 @@ const StepperForm = () => {
                   }
                   className="stepperinput"
                 />
-
-                <Heading fontSize="17px" fontWeight="500">
+                <div style={{
+                  marginBottom: "10px"
+                }}>
+                    <Heading fontSize="15px" fontWeight="500" >
                   End Date
-                </Heading>
+                </Heading> 
+                </div>
+                
+                
                 <Input
                   type="date"
                   value={work.endDate}
@@ -330,10 +342,14 @@ const StepperForm = () => {
                   }
                   className="stepperinput"
                 />
-
-                <Heading fontSize="17px" fontWeight="500">
+                  <div style={{
+                  marginBottom:"10px"
+                }}>
+                  <Heading fontSize="15px" fontWeight="500">
                   Company Name
                 </Heading>
+                </div>
+                
                 <Input
                   type="text"
                   value={work.companyName}
@@ -347,6 +363,7 @@ const StepperForm = () => {
                   type="button"
                   onClick={() => removeExperience(index)}
                   className="remove-button"
+                  style={{marginBottom:"15px"}}
                 >
                   Remove Experience
                 </button>
@@ -363,9 +380,12 @@ const StepperForm = () => {
           <>
             {education.map((edu, index) => (
               <div key={index} className="education-section">
-                <Heading fontSize="17px" fontWeight="500">
+                <div style={{marginBottom:"10px"}}>
+                <Heading fontSize="15px" fontWeight="500">
                   Degree
                 </Heading>
+                </div>
+            
                 <Input
                   type="text"
                   value={edu.degree}
@@ -374,10 +394,12 @@ const StepperForm = () => {
                   }
                   className="stepperinput"
                 />
-
-                <Heading fontSize="17px" fontWeight="500">
+                  <div style={{marginBottom:"10px"}}>
+                  <Heading fontSize="15px" fontWeight="500">
                   Field
                 </Heading>
+                  </div>
+                
                 <Input
                   type="text"
                   value={edu.field}
@@ -386,10 +408,13 @@ const StepperForm = () => {
                   }
                   className="stepperinput"
                 />
-
-                <Heading fontSize="17px" fontWeight="500">
+                
+                  <div style={{marginBottom:"10px"}}>
+                  <Heading fontSize="15px" fontWeight="500">
                   Start Date
                 </Heading>
+                  </div>
+               
                 <Input
                   type="date"
                   value={edu.startDate}
@@ -398,10 +423,12 @@ const StepperForm = () => {
                   }
                   className="stepperinput"
                 />
-
-                <Heading fontSize="17px" fontWeight="500">
+                   <div style={{marginBottom:"10px"}}>
+                   <Heading fontSize="15px" fontWeight="500">
                   End Date
                 </Heading>
+                   </div>
+              
                 <Input
                   type="date"
                   value={edu.endDate}
@@ -410,10 +437,12 @@ const StepperForm = () => {
                   }
                   className="stepperinput"
                 />
-
-                <Heading fontSize="17px" fontWeight="500">
+                    <div style={{marginBottom:"10px"}}>
+                    <Heading fontSize="15px" fontWeight="500">
                   Institute
                 </Heading>
+                    </div>
+            
                 <Input
                   type="text"
                   value={edu.institute}
@@ -452,7 +481,7 @@ const StepperForm = () => {
           onClick={step === 3 ? handleSubmit : nextStep}
           bgcolor="var(--bg-color2)"
           color="white"
-          fontSize="18px"
+          fontSize="16px"
           padding="8px 18px"
           borderRadius="8px"
         >
