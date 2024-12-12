@@ -92,6 +92,12 @@ function ProfilePage({ value, color }) {
   const expertIds = location.state?.expertIds || [];
   const [expertsData, setExpertsData] = useState([]);
 
+  const [isExpanded, setIsExpanded] = useState(false);
+  
+  const toggleExpand = () => {
+    setIsExpanded(!isExpanded);
+  };
+
   useEffect(() => {
     const fetchUserData = async () => {
       try {
@@ -272,6 +278,87 @@ function ProfilePage({ value, color }) {
                     </li>
                   </ul>
                 </div>
+              )}
+
+
+              
+{text === "candidate" && (
+                   <div style={{marginTop:"30px", marginLeft:"20px", width:"320px"}}>
+                   <div
+    style={{
+      borderRadius: "8px",
+      padding: "10px",
+      paddingLeft: "25px",
+    
+      
+      alignItems: "center",
+      alignContent:"center",
+      cursor: "cursor",
+      width: isExpanded ? "320px" : "320px", 
+     
+      transition: "all 0.3s ease-in-out",
+      ...(isExpanded && { backgroundColor: "#8EB7A8" })
+    }}
+    onClick={toggleExpand}
+  >
+  
+    <div
+    className=''
+      style={{ fontWeight:"500",
+        fontSize: "18px",
+        marginRight:"200px",
+        marginLeft:"-12px"
+      }}
+    >
+      {/* Core Development */}
+      <p style={{marginleft:"10px"}}>Panel</p>
+    </div>
+
+  
+    <div
+      onClick={toggleExpand}
+      style={{
+        
+        marginTop:"-30px",
+       
+        fontSize: "20px",
+        fontWeight: "400",
+        transform: isExpanded ? "rotate(45deg)" : "rotate(0deg)",
+        transition: "transform 0.3s ease",
+        cursor: "pointer",
+        marginLeft:"270px",
+
+      }}
+    >
+      +
+    </div>
+
+   
+    {isExpanded && (
+      <div
+        style={{
+          marginTop: "15px",
+          fontSize1: "16px",
+          width:"300px",
+          display:"flex-wrap",
+          
+        }}
+      >
+         <ol style={{marginLeft:"-12px"}}>
+      {expertsData.map((expert) => (
+        <li
+          key={expert.id}
+          value={expert.id}
+        >
+          {expert.name}
+        </li>
+      ))}
+    </ol>
+    
+      </div>
+    )}
+  </div>
+                 </div>
               )}
             </div>
 
