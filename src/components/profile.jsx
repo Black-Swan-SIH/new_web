@@ -380,7 +380,7 @@ function ProfilePage({ value, color }) {
                         {Math.round(
                           text === "candidate"
                             ? userData.relevancyScore
-                            : userData.profileScore
+                            : userData.averageProfileScore
                         )}{" "}
                         / 100
                       </p>
