@@ -14,7 +14,7 @@ import Main from "./Pages/Main.jsx";
 import CandidateHome from "./Pages/CandidateHome.jsx";
 import Joblist from "./components/Joblist.jsx";
 import JoblistCandidate from "./Pages/JoblistCandidate.jsx";
-
+import NotFound from './Pages/NotFound';
 import JobCandidate from "./Pages/JobCandidate.jsx";
 
 
@@ -65,7 +65,8 @@ const handleLogout = () => {
         <Route path="/jobs" element={<JoblistCandidate setShowNavbar={setShowNavbar}/>}/>
         <Route path="/history" element={<JobApplications setShowNavbar={setShowNavbar}/>}/>
         <Route path="/job" element={<JobCandidate setShowNavbar={setShowNavbar}/>}/>
-        
+
+        <Route path="*" element={<NotFound />} />
       </Routes>
 
         
