@@ -37,8 +37,8 @@ const Panel = ({
   };
  console.log(profileLink)
   return (
-    <div className="flex mb-12 justify-between items-center"  style={{ cursor: profileLink ? "pointer" : "default", paddingLeft:"25px", paddingRight:"25px", paddingTop:"5px", paddingBottom:"5px", borderRadius:"10px" , boxShadow: '0px 6px 15px rgba(0, 0, 0, 0.2)', backgroundColor:"white", background: "white", minWidth:"1000px"}}onClick={handleDivClick}>
-      <div style={{ flexBasis: "50%", marginTop:"10px"}}>
+    <div className="flex mb-12 justify-between items-center"  style={{ cursor: "pointer", paddingLeft:"25px", paddingRight:"25px", paddingTop:"5px", paddingBottom:"5px", borderRadius:"10px" , boxShadow: '0px 6px 15px rgba(0, 0, 0, 0.2)', backgroundColor:"white", background: "white", minWidth:"1000px"}}onClick={handleDivClick}>
+      <div style={{ flexBasis: "50%", marginTop:"10px", cursor: profileLink ? "pointer" : "default",}}>
         <Prof1
           name={name}
           unit={unit}

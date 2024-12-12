@@ -138,7 +138,6 @@ const Boxes = ({
             <option value="IIT Bombay">IIT Bombay</option>
             <option value="IIT Kanpur">IIT Kanpur</option>
             <option value="IIT Delhi">IIT Delhi</option>
-            <option value="TIET">IIT TIET</option>
           </select>
         ) : (
           <select
