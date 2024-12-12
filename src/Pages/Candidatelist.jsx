@@ -205,6 +205,7 @@ const Candidatelist = ({ head, page }) => {
           experience="Beginner"
           department={person?.department}
           onCheckBoxChange={handleCheckboxChange}
+          profileLink={person?.profileLink}
         />
       ));
     }

@@ -20,6 +20,7 @@ const Panel = ({
   reviews,
   interview,
   onCheckBoxChange,
+  profileLink,
 }) => {
   const navigate=useNavigate();
   const [isChecked, setIsChecked] = useState(false);
@@ -27,16 +28,18 @@ const Panel = ({
   const handleCheckboxChange = (event) => {
     const checked = event.target.checked;
     setIsChecked(checked);
-      console.log(id);
-      console.log(name)
       onCheckBoxChange(id, checked,name);
   };
- console.log(name)
+  const handleDivClick = () => {
+    if (profileLink) {
+      window.open(profileLink, '_blank');
+    }
+  };
+ console.log(profileLink)
   return (
-    <div className="flex mb-12 justify-between items-center"  style={{ cursor: "pointer", paddingLeft:"25px", paddingRight:"25px", paddingTop:"5px", paddingBottom:"5px", borderRadius:"10px" , boxShadow: '0px 6px 15px rgba(0, 0, 0, 0.2)', backgroundColor:"white", background: "white", minWidth:"1000px"}}>
+    <div className="flex mb-12 justify-between items-center"  style={{ cursor: profileLink ? "pointer" : "default", paddingLeft:"25px", paddingRight:"25px", paddingTop:"5px", paddingBottom:"5px", borderRadius:"10px" , boxShadow: '0px 6px 15px rgba(0, 0, 0, 0.2)', backgroundColor:"white", background: "white", minWidth:"1000px"}}onClick={handleDivClick}>
       <div style={{ flexBasis: "50%", marginTop:"10px"}}>
         <Prof1
-         
           name={name}
           unit={unit}
           profileScore={profileScore}
